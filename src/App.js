@@ -1,25 +1,67 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect,
+} from "react-router-dom";
+import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from "./components/header/header";
+import Home from "./pages/home";
+import Callback from "./components/callback/Callback";
+import NotFoundPage from "./pages/NotFoundPage";
+import Addresses from "./components/footer/Addresses";
+import IeltsPage from "./pages/IeltsPage";
+import SatPage from "./pages/SatPage";
+import NufypetPage from "./pages/NufypetPage";
+import ScrollToTop from "./layout/ScrollToTop";
+import EnglishPage from "./pages/EnglishPage";
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Layout>
+          <Router>
+            <ScrollToTop />
+            <Header />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/callback" component={Callback} />
+              <Route exact path="/ielts" component={IeltsPage} />
+              <Route exact path="/sat" component={SatPage} />
+              <Route exact path="/nufypet" component={NufypetPage} />
+              <Route exact path="/english" component={EnglishPage} />
+              <Route exact component={NotFoundPage} />
+            </Switch>
+          </Router>
+          <Addresses />
+          <Copyright>© eduvation.kz</Copyright>
+        </Layout>
+      </div>
+    );
+  }
 }
 
 export default App;
+
+const Layout = styled.div`
+  font-family: "Gilroy";
+`;
+
+const Copyright = styled.p`
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-weight: 500;
+
+  color: #e0e0e0;
+  margin: 32px;
+  bottom: 0;
+`;
