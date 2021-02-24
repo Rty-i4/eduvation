@@ -23,7 +23,7 @@ export default StartQuizButton;
 //   margin-left: auto;
 //   margin-right: auto;
 //   margin-top: 24px;
-//   border-radius: 30px;
+// border-radius: 30px;
 // `;
 
 const Button = styled.button`
