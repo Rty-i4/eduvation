@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 import { H3, H1 } from "../layout/TextStyles";
@@ -21,11 +21,17 @@ import Tick from "../images/Iconly/Bulk/tick.svg";
 import Chart from "../images/Iconly/Bulk/Chart.svg";
 import Document from "../images/Iconly/Bulk/Document.svg";
 import Users from "../images/Iconly/Bulk/users.svg";
-import Quiz2 from "../components/Quiz/Quiz2";
+// import Quiz2 from "../components/Quiz/Quiz2";
 import Slider from "react-slick";
 import QuizWelcomPage from "../components/Quiz/QuizWelcomPage";
+import Quiz from "../components/Quiz/Quiz";
 
 const Home = () => {
+  const [isTest, setIsTest] = useState(false);
+
+  const handleQuiz = () => {
+    setIsTest(!isTest);
+  };
   return (
     <div>
       <Img src={goknam} />
@@ -35,7 +41,7 @@ const Home = () => {
         IELTS, SAT, NUFYPET
       </H3>
       <MainButton />
-      <SecondaryButton />
+      <SecondaryButton action={handleQuiz} />
       <Callback />
       <Space>
         <H1>Наши курсы</H1>
@@ -66,7 +72,8 @@ const Home = () => {
       <SecondaryButton />
       <Space />
       <Testimonials />
-      <Quiz2 />
+      {/* <Quiz2 /> */}
+      <Quiz isTest={isTest} handleQuiz={handleQuiz} />
       <Space />
       <Jumbotron
         icon={Tick}

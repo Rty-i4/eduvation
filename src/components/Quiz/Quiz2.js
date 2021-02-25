@@ -21,10 +21,6 @@ export default function Quiz2() {
   const [quizForm, setQuizForm] = useState(false);
 
   const incrementQuestion = (isCorrect, index) => {
-    if (isCorrect === true) {
-      setScore(score + 1);
-    }
-
     allQuestions[currentQuestion].answerOptions.map((answerOption, i) => {
       i === index
         ? (answerOption.isSelected = true)
@@ -34,7 +30,7 @@ export default function Quiz2() {
       index
     ].isSelected = true);
     setAllQuestions({ ...allQuestions, selectedQ });
-    handleNext();
+    handleNext(isCorrect);
   };
 
   const action = () => {
@@ -77,6 +73,13 @@ export default function Quiz2() {
         setCurrentQuestion(nextQuestion);
       }, 400);
     } else {
+      allQuestions.map((question) => {
+        question.answerOptions.map((answerOption) => {
+          answerOption.isCorrect === answerOption.isSelected
+            ? setScore(score + 1)
+            : setScore(score);
+        });
+      });
       setTimeout(function () {
         // setShowScore(true);
         setQuizForm(true);
@@ -124,6 +127,10 @@ export default function Quiz2() {
   }, [currentQuestion]);
 
   useEffect(() => {
+    allQuestions.map((question) => {
+      question.answerOptions.map();
+    });
+
     setTimeout(function () {
       setShowingScore(!showingScore);
     }, 800);

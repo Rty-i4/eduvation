@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-function SecondaryButton({ text }) {
-  return <Button>{text || "Узнать свой уровень английского"}</Button>;
+function SecondaryButton({ text, action }) {
+  return (
+    <Button onClick={action}>
+      {text || "Узнать свой уровень английского"}
+    </Button>
+  );
 }
 
 export default SecondaryButton;
