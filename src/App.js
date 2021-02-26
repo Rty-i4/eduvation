@@ -27,19 +27,21 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <Router>
-            <ScrollToTop />
-            <Header />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/callback" component={Callback} />
-              <Route exact path="/ielts" component={IeltsPage} />
-              <Route exact path="/sat" component={SatPage} />
-              <Route exact path="/nufypet" component={NufypetPage} />
-              <Route exact path="/english" component={EnglishPage} />
-              <Route exact component={NotFoundPage} />
-            </Switch>
-          </Router>
+          <MaxWidth>
+            <Router>
+              <ScrollToTop />
+              <Header />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/callback" component={Callback} />
+                <Route exact path="/ielts" component={IeltsPage} />
+                <Route exact path="/sat" component={SatPage} />
+                <Route exact path="/nufypet" component={NufypetPage} />
+                <Route exact path="/english" component={EnglishPage} />
+                <Route exact component={NotFoundPage} />
+              </Switch>
+            </Router>
+          </MaxWidth>
           <Addresses />
           <Copyright>© eduvation.kz</Copyright>
         </Layout>
@@ -64,4 +66,9 @@ const Copyright = styled.p`
   color: #e0e0e0;
   margin: 32px;
   bottom: 0;
+`;
+
+const MaxWidth = styled.div`
+  max-width: 1234px;
+  margin: auto;
 `;

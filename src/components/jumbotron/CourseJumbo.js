@@ -36,7 +36,7 @@ const Hr = styled.div`
   margin: 0px auto;
 `;
 
-const Text = styled.p`
+const Text = styled.div`
   font-weight: 500;
   color: #e0e0e0;
   font-size: 16px;

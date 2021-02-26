@@ -31,6 +31,10 @@ export default Results;
 
 const Wrapper = styled.div`
   margin-top: 120px;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const Item = styled.div`

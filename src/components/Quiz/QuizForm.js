@@ -3,10 +3,16 @@ import { BodyIntro, Desc } from "../../layout/TextStyles";
 import FormInputs from "../callback/FormInputs";
 
 import gift from "../../images/gift.png";
+import arrowLeft from "../../images/arrow-left.svg";
+
 import styled from "styled-components";
-function QuizForm({ action }) {
+
+function QuizForm({ action, backToQuiz }) {
   return (
     <Wrapper>
+      <ButtonBack onClick={backToQuiz}>
+        <img src={arrowLeft} alt="arrow-left" />
+      </ButtonBack>
       <Desc>Последний шаг</Desc>
       <BodyIntro>Заполни форму и получи свой бонус!</BodyIntro>
       <Img src={gift} />
@@ -40,4 +46,24 @@ const Img = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
+`;
+
+const ButtonBack = styled.button`
+  position: absolute;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  /* border: 1px solid #bdbdbd; */
+  display: flex;
+  /* background: #1e2127; */
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 18px;
+    color: #c3c5ff;
+    margin-right: 2px;
+  }
 `;

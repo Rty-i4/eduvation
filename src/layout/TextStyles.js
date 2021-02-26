@@ -25,12 +25,30 @@ export const H2 = styled.h2`
 export const H3 = styled.h3`
   font-family: "Gilroy";
   font-weight: bold;
-  font-size: 30px;
+  font-size: 38px;
   text-align: ${(props) => (props.align ? "left" : "center")};
   line-height: 130%;
   color: #fff;
   @media screen and (max-width: 450px) {
     font-size: 24px;
+  }
+`;
+
+export const HeroTitle = styled.h1`
+  font-family: "Gilroy";
+  font-weight: bold;
+  font-size: 38px;
+  text-align: left;
+  line-height: 130%;
+  color: #fff;
+
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 24px;
+    text-align: center;
   }
 `;
 
@@ -58,6 +76,14 @@ export const BodyMain = styled.p`
 `;
 
 export const MediumText = styled.p`
+  font-family: "Gilroy";
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 140%;
+  color: #e0e0e0;
+`;
+
+export const MediumTextDiv = styled.div`
   font-family: "Gilroy";
   font-weight: 500;
   font-size: 17px;

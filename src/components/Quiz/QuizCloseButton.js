@@ -15,9 +15,10 @@ export default QuizCloseButton;
 
 const CloseButton = styled.div`
   position: absolute;
-  z-index: 4;
-  right: 20px;
-  top: 20px;
+  /* float: right; */
+  z-index: 10;
+  right: 8px;
+  top: -20px;
   width: 36px;
   height: 36px;
 `;

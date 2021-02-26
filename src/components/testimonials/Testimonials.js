@@ -22,6 +22,12 @@ export default Testimonials;
 
 const Wrapper = styled.div`
   margin: 96px auto;
+  width: 30%;
+  height: 400px;
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
 `;
 
 const Stories = styled.div`
@@ -30,12 +36,8 @@ const Stories = styled.div`
   /* flex-direction: row; */
   /* justify-content: space-around; */
   margin-top: 64px;
+  @media screen and (min-width: 450px) {
+    overflow: visible;
+  }
   /* grid-template-columns: ; */
-`;
-
-const Img = styled.img`
-  display: block;
-  margin-left: 16px;
-  margin-right: 16px;
-  margin-top: 30px;
 `;

@@ -72,12 +72,31 @@ const Wrapper = styled.div`
 const EndWrapper = styled.div`
   background-color: #1e2127;
   /* background-color: 0d0d0d; */
+  margin: auto;
+  max-width: 1234px;
   padding: 20px 0;
+  display: grid;
+
+  grid-template-columns: auto auto auto auto;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 40px;
+  }
+  @media screen and (max-width: 450px) {
+    display: block;
+  }
 `;
 
 const Img = styled.img`
   display: block;
   margin: 64px auto;
+
+  @media screen and (min-width: 768px) {
+    width: 800px;
+  }
 `;
 
 const Title = styled.div`

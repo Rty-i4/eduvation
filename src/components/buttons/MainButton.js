@@ -28,8 +28,7 @@ const Button = styled.button`
   position: relative;
   overflow: hidden;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+
   margin-top: 24px;
 
   width: 300px;
@@ -92,4 +91,9 @@ const Button = styled.button`
   -moz-backface-visibility: hidden;
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
+
+  @media screen and (max-width: 450px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;

@@ -13,6 +13,10 @@ function CourseCard({ img, title, subtitle, page }) {
         <Card>
           <Description>{subtitle}</Description>
           <Title>{title}</Title>
+          <Subtitle>
+            комплексная подготовка к поступлению в НУ, отсеивая все лишнее,
+            обучая тому, что максимально приблизит к успешной его сдаче.{" "}
+          </Subtitle>
           <LearnMore>
             <span>Подробнее</span>
             <IconDown src={ArrowRight} />
@@ -39,6 +43,13 @@ const Wrapper = styled.div`
   :hover {
     cursor: pointer;
   }
+
+  @media screen and (min-width: 450px) {
+    grid-template-columns: auto;
+    grid-template-rows: 170px auto;
+    width: 300px;
+    height: 400px;
+  }
 `;
 
 const Wallpaper = styled.div`
@@ -53,12 +64,14 @@ const Card = styled.div`
 `;
 
 const Img = styled.img`
-  height: 128px;
   object-fit: cover;
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  @media screen and (max-width: 450px) {
+    height: 128px;
+  }
 `;
 
 const Description = styled.p`
@@ -66,6 +79,9 @@ const Description = styled.p`
   /* color: #c2c7cf; */
   color: #a3a3a3;
   font-weight: 600;
+  @media screen and (min-width: 450px) {
+    text-transform: uppercase;
+  }
 `;
 
 const Title = styled.h4`
@@ -92,3 +108,16 @@ const LearnMore = styled.div`
 `;
 
 const IconDown = styled.img``;
+
+const Subtitle = styled.p`
+  font-family: Gilroy;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 130%;
+  color: #e0e0e0;
+
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
+`;

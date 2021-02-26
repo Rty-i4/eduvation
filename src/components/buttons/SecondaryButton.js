@@ -15,8 +15,6 @@ const Button = styled.button`
   position: relative;
   overflow: hidden;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 24px;
 
   width: 300px;
@@ -35,6 +33,10 @@ const Button = styled.button`
     cursor: pointer;
   }
 
+  @media screen and (max-width: 450px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
   /* @keyframes TransitioningBackground {
     0% {
       // background-: 1% 0%;

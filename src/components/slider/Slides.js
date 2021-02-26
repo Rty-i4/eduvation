@@ -10,7 +10,7 @@ export default class Slides extends Component {
     const settings = {
       className: "center",
       centerMode: true,
-      centerPadding: "50px",
+      // centerPadding: "50px",
       dots: true,
       infinite: true,
       speed: 500,
@@ -32,4 +32,7 @@ export default class Slides extends Component {
 const Img = styled.img`
   margin: auto;
   padding: 16px;
+  /* height: 200px; */
+  /* width: 30px; */
+  /* width: 100%; */
 `;

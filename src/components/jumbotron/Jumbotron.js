@@ -18,7 +18,9 @@ const Wrapper = styled.div`
   display: grid;
 
   grid-gap: 16px;
-  margin: 64px 20px 0 20px;
+  margin: 0px 20px 48px 20px;
+
+  max-width: 408px;
 `;
 
 const Icon = styled.img``;
@@ -26,7 +28,7 @@ const Icon = styled.img``;
 const MainText = styled.h2`
   color: #fff;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 24px;
 `;
 
 const Hr = styled.div`
@@ -39,6 +41,11 @@ const Hr = styled.div`
 const Text = styled.p`
   font-weight: 500;
   color: #e0e0e0;
-  font-size: 16px;
-  line-height: 130%;
+  font-size: 18px;
+  line-height: 25px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+    line-height: 130%;
+  }
 `;

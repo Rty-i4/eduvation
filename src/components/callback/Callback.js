@@ -27,14 +27,27 @@ export default Callback;
 
 const Wrapper = styled.div`
   display: grid;
+  justify-content: center;
+  align-content: center;
   grid-template-rows: auto;
-  margin: 120px 20px 120px;
-  max-width: 350px;
+  margin: 40px 20px 120px;
+  /* width: 432px; */
   margin: 120px auto;
+  height: 620px;
+
+  @media screen and (min-width: 768px) {
+    width: 500px;
+  }
+
+  @media screen and (max-width: 450px) {
+    /* width: 380px; */
+    margin-top: 80px;
+    margin-bottom: 70px;
+  }
 `;
 
 const FristWrap = styled.div`
-  height: 140px;
+  /* height: 140px; */
   background-color: #34435e;
   border-radius: 16px 16px 0 0;
 `;

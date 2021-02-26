@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BodyMain, MediumText } from "../../layout/TextStyles";
+import { BodyMain, MediumTextDiv } from "../../layout/TextStyles";
 
 // Icons
 import Cat from "../../images/Cat.png";
@@ -11,10 +11,10 @@ function Teachers({ name, description, image }) {
       <Img src={image} />
       <BodyMain>{name}</BodyMain>
       <Description>
-        <MediumText>
+        <MediumTextDiv>
           {description}
           <br />
-        </MediumText>
+        </MediumTextDiv>
       </Description>
     </Wrapper>
   );

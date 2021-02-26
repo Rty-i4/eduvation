@@ -57,7 +57,7 @@ function NufypetPage() {
         }
         subText={
           <div>
-            <p style={{ textAlign: "left" }}>
+            <div style={{ textAlign: "left" }}>
               <p
                 style={{
                   // color: "#e0e0e0",
@@ -79,7 +79,7 @@ function NufypetPage() {
                   мышлению/логике
                 </li>
               </ul>
-            </p>
+            </div>
             <p style={{ textAlign: "left" }}>
               <br /> Это позволит без лишнего стресса закончить 11-ый класс,
               сдать все экзамены и ЕНТ, а при поступлении уже просто повторять

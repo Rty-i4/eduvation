@@ -48,6 +48,11 @@ export default function Quiz({ isTest, handleQuiz }) {
     setShowScore(true);
   };
 
+  const backToQuiz = () => {
+    setQuizForm(false);
+    setVisible(true);
+  };
+
   const closeWelcome = () => {
     setWelcome(false);
   };
@@ -157,91 +162,100 @@ export default function Quiz({ isTest, handleQuiz }) {
     <BackLayer isTest={isTest}>
       <Container quizForm={quizForm}>
         <QuizCloseButton handleQuiz={handleQuiz} />
-        {welcome ? (
-          <QuizWelcomPage setWelcome={closeWelcome} />
-        ) : quizForm ? (
-          <QuizForm action={action} />
-        ) : (
-          <Section welcome={welcome}>
-            <Content>
-              <TitleWrapper>
-                <P>Placement test</P>
+        <ContentWrapper quizForm={quizForm}>
+          {welcome ? (
+            <QuizWelcomPage setWelcome={closeWelcome} />
+          ) : quizForm ? (
+            <QuizForm action={action} backToQuiz={backToQuiz} />
+          ) : (
+            <Section welcome={welcome}>
+              <Content>
+                <TitleWrapper>
+                  <P>Placement test</P>
 
-                <P>
-                  {currentQuestion + 1}/{questions.length}
-                </P>
-              </TitleWrapper>
-              <Hr />
-              {showScore ? (
-                <>
-                  <Score showScore={showingScore}>
-                    {/* <img src={Check} /> */}
-                    <CheckWrapper>
-                      <CheckMark />
-                    </CheckWrapper>
-                    <h4
-                      style={{ color: "#fff", fontWeight: 500, margin: "32px" }}
-                    >
-                      You scored {score} out of {questions.length}
-                    </h4>
-                    <Button2 visible={"true"} onClick={() => handleTryAgain()}>
-                      Try again
-                    </Button2>
-                  </Score>
-                </>
-              ) : (
-                <>
-                  <QuestionCard isVisible={questionVisible}>
-                    <TitleContainer visible={visible}>
-                      <QuestionTitle visible={visible}>
-                        {allQuestions[currentQuestion].questionText}
-                      </QuestionTitle>
-                    </TitleContainer>
+                  <P>
+                    {currentQuestion + 1}/{questions.length}
+                  </P>
+                </TitleWrapper>
+                <Hr />
+                {showScore ? (
+                  <>
+                    <Score showScore={showingScore}>
+                      {/* <img src={Check} /> */}
+                      <CheckWrapper>
+                        <CheckMark />
+                      </CheckWrapper>
+                      <h4
+                        style={{
+                          color: "#fff",
+                          fontWeight: 500,
+                          margin: "32px",
+                        }}
+                      >
+                        You scored {score} out of {questions.length}
+                      </h4>
+                      <Button2
+                        visible={"true"}
+                        onClick={() => handleTryAgain()}
+                      >
+                        Try again
+                      </Button2>
+                    </Score>
+                  </>
+                ) : (
+                  <>
+                    <QuestionCard isVisible={questionVisible}>
+                      <TitleContainer visible={visible}>
+                        <QuestionTitle visible={visible}>
+                          {allQuestions[currentQuestion].questionText}
+                        </QuestionTitle>
+                      </TitleContainer>
 
-                    {allQuestions[currentQuestion].answerOptions.map(
-                      (answerOption, index) => (
-                        <Button
-                          key={index}
-                          visible={visible}
-                          isSelected={answerOption.isSelected}
-                          disabled={disabled}
-                          onClick={() =>
-                            incrementQuestion(
-                              answerOption.isCorrect,
-                              //   answerOption.isSelected
-                              index
-                            )
-                          }
-                        >
-                          <Circle isSelected={answerOption.isSelected} />
-                          {answerOption.answerText}
-                        </Button>
-                      )
-                    )}
-                  </QuestionCard>
-                  <Buttons>
-                    <ButtonBack
-                      onClick={() => handlePrevious()}
-                      disabled={disabled}
-                    >
-                      <img src={arrowLeft} alt="arrow-left" />
-                    </ButtonBack>
-                    <ButtonNext
-                      onClick={() => handleNext()}
-                      disabled={disabled}
-                    >
-                      Next <img src={arrowRight} alt="arrow-right" />
-                    </ButtonNext>
-                  </Buttons>
-                </>
-              )}
-            </Content>{" "}
-          </Section>
-        )}
-        {/* <Section2>
+                      {allQuestions[currentQuestion].answerOptions.map(
+                        (answerOption, index) => (
+                          <Button
+                            key={index}
+                            visible={visible}
+                            isSelected={answerOption.isSelected}
+                            disabled={disabled}
+                            onClick={() =>
+                              incrementQuestion(
+                                answerOption.isCorrect,
+                                //   answerOption.isSelected
+                                index
+                              )
+                            }
+                          >
+                            <Circle isSelected={answerOption.isSelected} />
+                            {answerOption.answerText}
+                          </Button>
+                        )
+                      )}
+                    </QuestionCard>
+                    <Buttons>
+                      <ButtonBack
+                        onClick={() => handlePrevious()}
+                        disabled={disabled}
+                      >
+                        <img src={arrowLeft} alt="arrow-left" />
+                      </ButtonBack>
+                      <ButtonNext
+                        onClick={() => handleNext()}
+                        disabled={disabled}
+                      >
+                        Next <img src={arrowRight} alt="arrow-right" />
+                      </ButtonNext>
+                    </Buttons>
+                  </>
+                )}
+              </Content>
+            </Section>
+          )}
+          {/* <Section2>
         <Pattern src={pattern} />
         <RocketImg src={rocket} />
-      </Section2> */}
+      </Section2> */}{" "}
+        </ContentWrapper>
       </Container>
     </BackLayer>
   );
@@ -285,11 +299,17 @@ const Container = styled.div`
   /* filter: drop-shadow(0px 20px 40px rgba(108, 105, 117, 0.5)); */
   /* box-shadow: 0px 20px 40px rgba(108, 105, 117, 0.15); */
   /* overflow-x: hidden; */
-  overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")};
-
+  /* overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")}; */
   /* @media screen and (max-width: 500px) {
     width: 300px;
   } */
+`;
+
+const ContentWrapper = styled.div`
+  height: inherit;
+  width: 100%;
+  overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")};
+  display: inherit;
 `;
 
 const Section = styled.div`
@@ -372,21 +392,15 @@ const Button = styled.button`
   color: #fff;
   font-family: "Gilroy";
   font-weight: 500;
-  /* background-color: #fff; */
-  /* background-color: ${(props) => (props.isSelected ? "#e0e1ff" : "#fff")}; */
-  /* background-color: ${(props) =>
-    props.isSelected ? "#EBECFF" : "#1E2127"}; */
   background-color: #1e2127;
   border-radius: 10px;
   border: solid;
   border-width: ${(props) => (props.isSelected ? "2px" : "2px")};
-  /* border-color: ${(props) => (props.isSelected ? "#42A132" : "#0d0d0d")}; */
   border-color: ${(props) => (props.isSelected ? "#fff" : "#0d0d0d")};
   display: flex;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  /* border: 1px solid d#e9e9e9; */
   cursor: pointer;
   margin-bottom: 16px;
 
@@ -396,11 +410,8 @@ const Button = styled.button`
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   :hover {
-    /* background-color: #42a132; */
-    /* transform: translateX(-20px); */
     div {
       background-color: #fff;
-      /* background-color: #000; */
     }
   }
 `;
@@ -408,15 +419,7 @@ const Circle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  /* background: #e0e1ff; */
-  /* background-color: ${(props) =>
-    props.isSelected ? "#666aff" : "#e0e1ff"}; */
-  background: ${(props) =>
-    props.isSelected
-      ? "#fff"
-      : //   "linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%)"
-        // "#EBECFF"};
-        "#e0e0e0"};
+  background: ${(props) => (props.isSelected ? "#fff" : "#e0e0e0")};
   margin-right: 16px;
 `;
 
@@ -424,7 +427,6 @@ const Button2 = styled.button`
   width: 200px;
   font-size: 16px;
   color: #e0e0e0;
-  /* background-color: #fff; */
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
   border-radius: 16px;
   outline: none;
@@ -512,15 +514,14 @@ const ButtonBack = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #c3c5ff;
+  border: 1px solid #bdbdbd;
   display: flex;
-  background: #fff;
+  background: #1e2127;
   align-items: center;
   justify-content: center;
 
   :hover {
-    background: #f8f8f8;
-    border-color: #a6a9ff;
+    border-color: #4ea732;
   }
 
   img {
@@ -612,7 +613,6 @@ const TitleWrapper = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   justify-content: space-between;
-  margin-right: 64px;
 `;
 
 const TitleContainer = styled.div`
