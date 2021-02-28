@@ -30,19 +30,20 @@ const Wrapper = styled.div`
   justify-content: center;
   align-content: center;
   grid-template-rows: auto;
-  margin: 40px 20px 120px;
+  /* margin: 40px 20px 120px; */
   /* width: 432px; */
-  margin: 120px auto;
+  /* margin: 120px auto; */
   height: 620px;
 
   @media screen and (min-width: 768px) {
-    width: 500px;
+    width: 400px;
+    margin-left: 0px;
   }
 
   @media screen and (max-width: 450px) {
     /* width: 380px; */
-    margin-top: 80px;
-    margin-bottom: 70px;
+    /* margin-top: 80px; */
+    /* margin-bottom: 70px; */
   }
 `;
 

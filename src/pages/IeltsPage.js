@@ -13,6 +13,7 @@ import SecondaryButton from "../components/buttons/SecondaryButton";
 import PageHero from "../components/PageHero/PageHero";
 import CourseJumbo from "../components/jumbotron/CourseJumbo";
 import Testimonials from "../components/testimonials/Testimonials";
+import { ButtonsWrapper } from "../layout/ButtonsWrapper";
 
 function IeltsPage() {
   return (
@@ -28,95 +29,105 @@ function IeltsPage() {
         image={Cambridge}
         text="Получить 500+ слов для IELTS"
       />
-      <CourseJumbo
-        mainText={
-          <div>
-            IELTS 7.0+
-            <br />
-            за 2.5 месяца
-          </div>
-        }
-        subText={
-          <div>
-            <p>
-              Подготовим вас по всем четырем секциям с отслеживанием вашего
-              прогресса через проводимые каждые две недели пробные тесты (mock).
-            </p>
-
-            <p>
+      <Content>
+        <CourseJumbo
+          reverse={true}
+          mainText={
+            <div>
+              IELTS 7.0+
               <br />
-            </p>
-          </div>
-        }
-        image={ielts7}
-      />
-      <CourseJumbo
-        mainText={
-          <div>
-            Ключевые навыки для
-            <br />
-            успешного балла
-          </div>
-        }
-        subText={
-          <div>
-            <p>
-              <p style={{ fontWeight: 600, fontSize: "18px", color: "#fff" }}>
-                После обучения вы
+              за 2.5 месяца
+            </div>
+          }
+          subText={
+            <div>
+              <p>
+                Подготовим вас по всем четырем секциям с отслеживанием вашего
+                прогресса через проводимые каждые две недели пробные тесты
+                (mock).
               </p>
-              <ul style={{ textAlign: "left" }}>
+
+              <p>
                 <br />
-                <li>• проработаете все "подводные камни"</li>
-                <li>• научитесь следовать таймингам </li>
-                <li>• узнаете по какой логике построен тест</li>
-                <li>• разберёте виды вопросов и стратегии </li>
-                <li>• научитесь писать академиские эссе </li>
-                <li>• узнаеете как выжать максимальный балл</li>
-              </ul>
-            </p>
+              </p>
+            </div>
+          }
+          image={ielts7}
+        />
+        <CourseJumbo
+          reverse={false}
+          mainText={
+            <div>
+              Ключевые навыки для
+              <br />
+              успешного балла
+            </div>
+          }
+          subText={
+            <div>
+              <div>
+                <p style={{ fontWeight: 600, fontSize: "18px", color: "#fff" }}>
+                  После обучения вы
+                </p>
+                <ul style={{ textAlign: "left" }}>
+                  <br />
+                  <li>• проработаете все "подводные камни"</li>
+                  <li>• научитесь следовать таймингам </li>
+                  <li>• узнаете по какой логике построен тест</li>
+                  <li>• разберёте виды вопросов и стратегии </li>
+                  <li>• научитесь писать академиские эссе </li>
+                  <li>• узнаеете как выжать максимальный балл</li>
+                </ul>
+              </div>
 
-            <p>
+              <p>
+                <br />
+              </p>
+            </div>
+          }
+          image={learning}
+        />
+        <ButtonsWrapper>
+          <MainButton />
+          <SecondaryButton text="Получить 500+ слов для IELTS" />
+        </ButtonsWrapper>
+        <Testimonials />
+        <CourseJumbo
+          reverse={true}
+          mainText={
+            <div>
+              Что такое IELTS?
               <br />
-            </p>
-          </div>
-        }
-        image={learning}
-      />
-      <MainButton />
-      <SecondaryButton text="Получить 500+ слов для IELTS" />
-      <Testimonials />
-      <CourseJumbo
-        mainText={
-          <div>
-            Что такое IELTS?
-            <br />
-          </div>
-        }
-        subText={
-          <div style={{ textAlign: "left" }}>
-            <p>
-              Academic IELTS - международный тест на определение ваших знаний
-              английкого языка по четырем секциям (writing, listening, speaking,
-              reading).{" "}
-            </p>
+            </div>
+          }
+          subText={
+            <div style={{ textAlign: "left" }}>
+              <p>
+                Academic IELTS - международный тест на определение ваших знаний
+                английкого языка по четырем секциям (writing, listening,
+                speaking, reading).{" "}
+              </p>
 
-            <p>
-              <br />
-              При поступлении на учебу в заграничные ВУЗы или ВУЗы с английским
-              обучением, сертификат IELTS подтверждает Вашу способность
-              обучаться в учебном заведении на английском языке.
-            </p>
-            <p>
-              <br />
-              IELTS это авторитетный тест, который принимают практически во всех
-              странах мира и во всех учебных заведениях.
-            </p>
-          </div>
-        }
-        image={Crit}
-      />
-      <MainButton />
-      <SecondaryButton text="Получить 500+ слов для IELTS" />
+              <p>
+                <br />
+                При поступлении на учебу в заграничные ВУЗы или ВУЗы с
+                английским обучением, сертификат IELTS подтверждает Вашу
+                способность обучаться в учебном заведении на английском языке.
+              </p>
+              {/* <p>
+                <br />
+                IELTS это авторитетный тест, который принимают практически во
+                всех странах мира и во всех учебных заведениях.
+              </p> */}
+            </div>
+          }
+          image={Crit}
+        />
+        <ButtonsWrapper>
+          <MainButton />
+          <SecondaryButton text="Получить 500+ слов для IELTS" />
+        </ButtonsWrapper>
+      </Content>
     </Wrapper>
   );
 }
@@ -175,4 +186,7 @@ const Hr = styled.div`
   margin: 24px auto;
 `;
 
-const Buttons = styled.div``;
+const Content = styled.div`
+  max-width: 1234px;
+  margin: auto;
+`;

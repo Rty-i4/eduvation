@@ -6,6 +6,7 @@ import { H3 } from "../../layout/TextStyles";
 import karta from "../../images/karta.svg";
 import Address from "./Address";
 import Callback from "../callback/Callback";
+import JumboCall from "../jumbotron/JumboCall";
 
 function Addresses() {
   const cities = [
@@ -36,7 +37,8 @@ function Addresses() {
   ];
   return (
     <div>
-      <Callback />
+      {/* <Callback /> */}
+      <JumboCall />
       <Wrapper>
         <Title>
           <H3>Мы в 4 городах</H3>
@@ -93,9 +95,14 @@ const EndWrapper = styled.div`
 const Img = styled.img`
   display: block;
   margin: 64px auto;
+  width: 800px;
 
-  @media screen and (min-width: 768px) {
-    width: 800px;
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 300px;
   }
 `;
 

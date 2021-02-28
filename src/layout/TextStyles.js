@@ -136,6 +136,10 @@ export const Desc = styled.p`
   font-size: 16px;
   color: #e0e0e0;
   text-align: ${(props) => (props.align ? "left" : "center")};
-  margin: 16px 0;
+  margin: 16px 0 16px;
   line-height: 130%;
+
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+  }
 `;

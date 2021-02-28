@@ -4,7 +4,7 @@ import { SmallText, Desc, H1, H3 } from "../../layout/TextStyles";
 
 // Images
 import pattern from "../../images/work-pattern.png";
-import rocket from "../../images/crisp-works.png";
+import rocket from "../../images/rocket.png";
 import gift from "../../images/gift.png";
 import StartQuizButton from "../buttons/StartQuizButton";
 
@@ -16,14 +16,25 @@ function QuizWelcomPage({ setWelcome }) {
         <RocketImg src={rocket} />
       </ImageWrapper>
       <Section>
-        <H3 align={true}>Хотите проверить свой уровень английского?</H3>
-        <Desc align={true}>
-          Пройди тест и подбери подходящий формат обучения
-        </Desc>
-        <StartQuizButton setWelcome={setWelcome} />
+        <TextWrapper>
+          <H3 align={true}>
+            Хотите проверить свой <br />
+            уровень английского?
+          </H3>
+          <Desc align={true}>
+            Пройди тест и подбери подходящий
+            <br />
+            формат обучения
+          </Desc>
+          <StartQuizButton setWelcome={setWelcome} />
+        </TextWrapper>
 
-        <SmallText>Бонус после прохождения теста</SmallText>
-        <Img src={gift} />
+        <Bonus>
+          <Img src={gift} />{" "}
+          <SmallText>
+            Бонус после прохождения теста <br /> Скидка 10%
+          </SmallText>
+        </Bonus>
       </Section>
     </Wrapper>
   );
@@ -47,9 +58,9 @@ const ImageWrapper = styled.div`
   height: 233px;
   overflow: hidden;
   margin-bottom: 16px;
-  /* @media screen and (max-width: 500px) {
+  @media screen and (min-width: 768px) {
     display: none;
-  } */
+  }
 `;
 
 const Pattern = styled.img`
@@ -74,4 +85,31 @@ const Img = styled.img`
   height: 75px;
 `;
 
-const Section = styled.div``;
+const Section = styled.div`
+  display: grid;
+  /* grid-gap: 0px; */
+  align-content: space-between;
+  @media screen and (min-width: 450px) {
+    margin: 80px 30px 0;
+    /* margin: auto; */
+    justify-content: start;
+
+    grid-gap: 40px;
+  }
+`;
+
+const Bonus = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 32px 0 0;
+  align-items: end;
+  justify-content: start;
+  grid-gap: 20px;
+`;
+
+const TextWrapper = styled.div`
+  @media screen and (min-width: 450px) {
+    display: grid;
+    grid-gap: 0px;
+  }
+`;

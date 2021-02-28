@@ -41,4 +41,13 @@ const Wrapper = styled.div`
   grid-template-columns: auto auto auto;
   grid-template-rows: auto;
   row-gap: 50px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+
+  @media screen and (max-width: 450px) {
+    display: block;
+  }
 `;

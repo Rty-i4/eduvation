@@ -6,6 +6,7 @@ import { H1, H3 } from "../../layout/TextStyles";
 import Cambridge from "../../images/cambridge.jpg";
 import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
+import { ButtonsWrapper } from "../../layout/ButtonsWrapper";
 
 function PageHero({ title, description, image, text }) {
   return (
@@ -16,10 +17,12 @@ function PageHero({ title, description, image, text }) {
             <H1>{title}</H1>
             <Hr />
             <H3>{description}</H3>
+            {/* <ButtonsWrapper> */}
             <Buttons>
               <MainButton />
               <SecondaryButton text={text} />
             </Buttons>
+            {/* </ButtonsWrapper> */}
           </HeroText>
         </HeroImage>
       </HeroSection>
@@ -33,6 +36,10 @@ const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   height: 500px;
+
+  @media screen and (min-width: 450px) {
+    height: 600px;
+  }
 `;
 
 const HeroSection = styled.div`
@@ -64,6 +71,10 @@ const HeroImage = styled.div`
   background-position: center center;
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+
+  @media screen and (min-width: 450px) {
+    height: 700px;
+  }
 `;
 
 const Hr = styled.div`
@@ -74,4 +85,16 @@ const Hr = styled.div`
   margin: 32px auto;
 `;
 
-const Buttons = styled.div``;
+const Buttons = styled.div`
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: center;
+  grid-gap: 0px;
+  margin-top: 30px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-gap: 0px;
+    margin-top: 0px;
+  }
+`;

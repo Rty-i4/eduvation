@@ -7,43 +7,45 @@ import Users from "../../images/Iconly/Bulk/users.svg";
 import Jumbotron from "./Jumbotron";
 import styled from "styled-components";
 
-function HomeJumbos() {
+function HomeJumbos({ first }) {
   return (
     <Wrapper>
-      <Jumbotron
-        icon={Tick}
-        mainText={
-          <div>
-            Нацеленность на <br />
-            результат
-          </div>
-        }
-        subText="80% учеников набирают желаемый балл с первой попытки."
-      />
-      <Jumbotron
-        icon={Document}
-        mainText={
-          <div>
-            Проверенные <br />
-            материалы
-          </div>
-        }
-        subText="Материалы для подготовки собраны 
+      <FirstJumbo first={first}>
+        <Jumbotron
+          icon={Tick}
+          mainText={
+            <div>
+              Нацеленность на <br />
+              результат
+            </div>
+          }
+          subText="80% учеников набирают желаемый балл с первой попытки"
+        />
+        <Jumbotron
+          icon={Chart}
+          mainText={
+            <div>
+              Отслеживание <br />
+              прогресса
+            </div>
+          }
+          subText="Следим за прогрессом учеников через регулярные сдачи пробных тестов 
+          что помогает выявлять сильные и слабые стороны которые нужно развивать"
+        />
+      </FirstJumbo>
+      <LastJumbo first={first}>
+        <Jumbotron
+          icon={Document}
+          mainText={
+            <div>
+              Проверенные <br />
+              материалы
+            </div>
+          }
+          subText="Материалы для подготовки собраны 
           из проверенных источников"
-      />
+        />
 
-      <Jumbotron
-        icon={Chart}
-        mainText={
-          <div>
-            Отслеживание <br />
-            прогресса
-          </div>
-        }
-        subText="Регулярная сдача пробных тестов 
-          помогает регулярно прогрессировать."
-      />
-      <LastJumbo>
         <Jumbotron
           icon={Users}
           mainText={
@@ -62,18 +64,22 @@ function HomeJumbos() {
 export default HomeJumbos;
 
 const Wrapper = styled.div`
-  margin: 0px 0px;
+  margin: auto;
 
   @media screen and (min-width: 768px) {
-    margin: 0px 0 60px;
+    /* margin: 0px 0 60px; */
   }
   @media screen and (max-width: 450px) {
     display: none;
   }
 `;
-
+const FirstJumbo = styled.div`
+  @media screen and (min-width: 450px) {
+    display: ${(props) => (props.first ? "block" : "none")};
+  }
+`;
 const LastJumbo = styled.div`
   @media screen and (min-width: 450px) {
-    display: none;
+    display: ${(props) => (props.first ? "none" : "block")};
   }
 `;

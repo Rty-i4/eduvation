@@ -9,6 +9,9 @@ import QuizWelcomPage from "./QuizWelcomPage";
 import QuizForm from "./QuizForm";
 import QuizCloseButton from "./QuizCloseButton";
 
+import pattern from "../../images/work-pattern.png";
+import rocket from "../../images/rocket.png";
+
 export default function Quiz({ isTest, handleQuiz }) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
@@ -134,14 +137,6 @@ export default function Quiz({ isTest, handleQuiz }) {
     }, 1000);
   };
 
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       //   console.log('This will run every second!');
-  //       setVisible(!visible);
-  //     }, 1000);
-  //     return () => clearInterval(interval);
-  //   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       //   console.log("This will run after 1 second!");
@@ -156,107 +151,106 @@ export default function Quiz({ isTest, handleQuiz }) {
     }, 800);
   }, [showScore]);
 
-  // Custom
-
   return (
     <BackLayer isTest={isTest}>
-      <Container quizForm={quizForm}>
-        <QuizCloseButton handleQuiz={handleQuiz} />
-        <ContentWrapper quizForm={quizForm}>
-          {welcome ? (
-            <QuizWelcomPage setWelcome={closeWelcome} />
-          ) : quizForm ? (
-            <QuizForm action={action} backToQuiz={backToQuiz} />
-          ) : (
-            <Section welcome={welcome}>
-              <Content>
-                <TitleWrapper>
-                  <P>Placement test</P>
+      {isTest ? (
+        <Container quizForm={quizForm} isTest={isTest}>
+          <QuizCloseButton handleQuiz={handleQuiz} />
+          <ContentWrapper quizForm={quizForm} isTest={isTest}>
+            {welcome ? (
+              <QuizWelcomPage setWelcome={closeWelcome} />
+            ) : quizForm ? (
+              <QuizForm action={action} backToQuiz={backToQuiz} />
+            ) : (
+              <Section welcome={welcome}>
+                <Content>
+                  <TitleWrapper>
+                    <P>Placement test</P>
 
-                  <P>
-                    {currentQuestion + 1}/{questions.length}
-                  </P>
-                </TitleWrapper>
-                <Hr />
-                {showScore ? (
-                  <>
-                    <Score showScore={showingScore}>
-                      {/* <img src={Check} /> */}
-                      <CheckWrapper>
-                        <CheckMark />
-                      </CheckWrapper>
-                      <h4
-                        style={{
-                          color: "#fff",
-                          fontWeight: 500,
-                          margin: "32px",
-                        }}
-                      >
-                        You scored {score} out of {questions.length}
-                      </h4>
-                      <Button2
-                        visible={"true"}
-                        onClick={() => handleTryAgain()}
-                      >
-                        Try again
-                      </Button2>
-                    </Score>
-                  </>
-                ) : (
-                  <>
-                    <QuestionCard isVisible={questionVisible}>
-                      <TitleContainer visible={visible}>
-                        <QuestionTitle visible={visible}>
-                          {allQuestions[currentQuestion].questionText}
-                        </QuestionTitle>
-                      </TitleContainer>
+                    <P>
+                      {currentQuestion + 1}/{questions.length}
+                    </P>
+                  </TitleWrapper>
+                  <Hr />
+                  {showScore ? (
+                    <>
+                      <Score showScore={showingScore}>
+                        <CheckWrapper>
+                          <CheckMark />
+                        </CheckWrapper>
+                        <h4
+                          style={{
+                            color: "#fff",
+                            fontWeight: 500,
+                            margin: "32px",
+                          }}
+                        >
+                          You scored {score} out of {questions.length}
+                        </h4>
+                        <Button2
+                          visible={"true"}
+                          onClick={() => handleTryAgain()}
+                        >
+                          Try again
+                        </Button2>
+                      </Score>
+                    </>
+                  ) : (
+                    <>
+                      <QuestionCard isVisible={questionVisible}>
+                        <TitleContainer visible={visible}>
+                          <QuestionTitle visible={visible}>
+                            {allQuestions[currentQuestion].questionText}
+                          </QuestionTitle>
+                        </TitleContainer>
 
-                      {allQuestions[currentQuestion].answerOptions.map(
-                        (answerOption, index) => (
-                          <Button
-                            key={index}
-                            visible={visible}
-                            isSelected={answerOption.isSelected}
-                            disabled={disabled}
-                            onClick={() =>
-                              incrementQuestion(
-                                answerOption.isCorrect,
-                                //   answerOption.isSelected
-                                index
-                              )
-                            }
-                          >
-                            <Circle isSelected={answerOption.isSelected} />
-                            {answerOption.answerText}
-                          </Button>
-                        )
-                      )}
-                    </QuestionCard>
-                    <Buttons>
-                      <ButtonBack
-                        onClick={() => handlePrevious()}
-                        disabled={disabled}
-                      >
-                        <img src={arrowLeft} alt="arrow-left" />
-                      </ButtonBack>
-                      <ButtonNext
-                        onClick={() => handleNext()}
-                        disabled={disabled}
-                      >
-                        Next <img src={arrowRight} alt="arrow-right" />
-                      </ButtonNext>
-                    </Buttons>
-                  </>
-                )}
-              </Content>
-            </Section>
-          )}
-          {/* <Section2>
-        <Pattern src={pattern} />
-        <RocketImg src={rocket} />
-      </Section2> */}{" "}
-        </ContentWrapper>
-      </Container>
+                        {allQuestions[currentQuestion].answerOptions.map(
+                          (answerOption, index) => (
+                            <Button
+                              key={index}
+                              visible={visible}
+                              isSelected={answerOption.isSelected}
+                              disabled={disabled}
+                              onClick={() =>
+                                incrementQuestion(
+                                  answerOption.isCorrect,
+                                  //   answerOption.isSelected
+                                  index
+                                )
+                              }
+                            >
+                              <Circle isSelected={answerOption.isSelected} />
+                              {answerOption.answerText}
+                            </Button>
+                          )
+                        )}
+                      </QuestionCard>
+                      <Buttons>
+                        <ButtonBack
+                          onClick={() => handlePrevious()}
+                          disabled={disabled}
+                        >
+                          <img src={arrowLeft} alt="arrow-left" />
+                        </ButtonBack>
+                        <ButtonNext
+                          onClick={() => handleNext()}
+                          disabled={disabled}
+                        >
+                          Next <img src={arrowRight} alt="arrow-right" />
+                        </ButtonNext>
+                      </Buttons>
+                    </>
+                  )}
+                </Content>
+              </Section>
+            )}
+            <Section2>
+              <Pattern src={pattern} />
+              <RocketImg src={rocket} />
+            </Section2>
+          </ContentWrapper>
+        </Container>
+      ) : null}
     </BackLayer>
   );
 }
@@ -273,15 +267,12 @@ const BackLayer = styled.div`
   backdrop-filter: blur(10px) saturate(100%);
   background: rgba(0, 0, 0, 0.3);
 
-  transform: translate(-50%, ${(props) => (props.isTest ? "-50%" : "-48%")});
+  transform: translate(-50%, ${(props) => (props.isTest ? "-50%" : "-47%")});
   opacity: ${(props) => (props.isTest ? 1 : 0)};
-  transition: all 0.3s ease-in-out;
   visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
+  transition: all 0.3s ease-in-out;
 `;
 const Container = styled.div`
-  /* width: 100%; */
-  /* min-width: 900px; */
-  /* width: 1200px; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -289,12 +280,14 @@ const Container = styled.div`
 
   background-color: #0d0d0d;
   width: 94%;
+  max-width: 1024px;
   /* margin: 40px 20px; */
   height: 600px;
 
   border: 4px solid #1e2127;
   border-radius: 20px;
   display: grid;
+  visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
   /* grid-template-columns: auto 490px; */
   /* filter: drop-shadow(0px 20px 40px rgba(108, 105, 117, 0.5)); */
   /* box-shadow: 0px 20px 40px rgba(108, 105, 117, 0.15); */
@@ -310,6 +303,15 @@ const ContentWrapper = styled.div`
   width: 100%;
   overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")};
   display: inherit;
+  visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
+  /* overflow: hidden; */
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 400px;
+
+  @media screen and (max-width: 450px) {
+    grid-template-columns: auto;
+  }
 `;
 
 const Section = styled.div`
@@ -331,7 +333,14 @@ const Section = styled.div`
 
 const Section2 = styled.div`
   position: relative;
-  background: linear-gradient(314.94deg, #4e59f5 0%, #ad95f8 100%);
+  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
+  border-radius: 0 16px 16px 0;
+  overflow: hidden;
+  /* z-index: 0; */
+  /* height: 593px; */
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 `;
 
 const Pattern = styled.img`

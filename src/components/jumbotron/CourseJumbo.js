@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { H3 } from "../../layout/TextStyles";
 
 // Icons
 
-function CourseJumbo({ mainText, subText, image }) {
+function CourseJumbo({ mainText, subText, image, reverse }) {
   return (
-    <Wrapper>
-      <H3>{mainText}</H3>
-      <Hr />
-      <Icon src={image} />
-      <Text>{subText}</Text>
+    <Wrapper reverse={reverse}>
+      <SectionOne>
+        <Title>{mainText}</Title>
+        <Hr />
+        <Icon src={image} />
+        <Text>{subText}</Text>
+      </SectionOne>
+      <ImgDesktop src={image} />
     </Wrapper>
   );
 }
@@ -19,21 +21,58 @@ export default CourseJumbo;
 
 const Wrapper = styled.div`
   display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas: "${(props) =>
+    props.reverse ? "content image" : "image content"}";
+  margin: 100px 20px 60px;
+  @media screen and (max-width: 450px) {
+    grid-template-columns: auto;
+    justify-self: center;
+    margin: 60px 20px 60px;
+  }
+`;
 
+const SectionOne = styled.div`
+  display: grid;
   grid-gap: 16px;
-  margin: 60px 20px 60px;
+  justify-content: center;
+  align-content: center;
+  grid-area: content;
+
+  @media screen and (max-width: 450px) {
+    grid-gap: 16px;
+  }
 `;
 
 const Icon = styled.img`
   margin: 32px auto;
+
+  @media screen and (min-width: 450px) {
+    display: none;
+  }
+`;
+
+const ImgDesktop = styled.img`
+  margin: 32px auto;
+  width: 350px;
+  grid-area: image;
+  @media screen and (max-width: 768px) {
+    width: 300px;
+  }
+  @media screen and (max-width: 450px) {
+    display: none;
+  }
 `;
 
 const Hr = styled.div`
   height: 4px;
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
-  width: 225px;
+  width: 320px;
   border-radius: 8px;
-  margin: 0px auto;
+  @media screen and (max-width: 450px) {
+    margin: 0px auto;
+    width: 225px;
+  }
 `;
 
 const Text = styled.div`
@@ -43,4 +82,27 @@ const Text = styled.div`
   line-height: 130%;
   text-align: center;
   line-height: 25px;
+  max-width: 450px;
+
+  @media screen and (min-width: 450px) {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+  }
+`;
+
+export const Title = styled.h3`
+  font-family: "Gilroy";
+  font-weight: bold;
+  font-size: 38px;
+  text-align: left;
+  line-height: 130%;
+  color: #fff;
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 24px;
+    text-align: center;
+  }
 `;
