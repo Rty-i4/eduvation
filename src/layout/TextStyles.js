@@ -29,7 +29,7 @@ export const H3 = styled.h3`
   text-align: ${(props) => (props.align ? "left" : "center")};
   line-height: 130%;
   color: #fff;
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     font-size: 24px;
   }
 `;

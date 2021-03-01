@@ -3,24 +3,22 @@ import styled from "styled-components";
 
 import CloseBtn from "../../images/CloseButton.svg";
 
-function QuizCloseButton({ handleQuiz }) {
+function CloseVideoButton({ action }) {
   return (
-    <CloseButton onClick={handleQuiz}>
+    <CloseButton onClick={action}>
       <img src={CloseBtn} />
     </CloseButton>
   );
 }
 
-export default QuizCloseButton;
+export default CloseVideoButton;
 
 const CloseButton = styled.div`
   position: absolute;
   /* float: right; */
   z-index: 10;
-
-  // before QCBW
-  /* right: 8px;
-  top: -20px; */
+  right: 8px;
+  top: 30px;
   width: 36px;
   height: 36px;
 `;

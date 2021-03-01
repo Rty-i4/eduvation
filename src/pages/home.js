@@ -28,6 +28,10 @@ const Home = () => {
   const handleQuiz = () => {
     setIsTest(!isTest);
   };
+
+  const closeQuiz = () => {
+    setIsTest(false);
+  };
   return (
     <Wrapper>
       <Hero action={handleQuiz} />
@@ -42,18 +46,18 @@ const Home = () => {
       <Space />
       <ButtonsWrapper>
         <MainButton />
-        <SecondaryButton />
+        <SecondaryButton action={handleQuiz} />
       </ButtonsWrapper>
       <Space />
       <Testimonials />
-      <Quiz isTest={isTest} handleQuiz={handleQuiz} />
+      <Quiz isTest={isTest} handleQuiz={closeQuiz} />
       <Space />
       <MobileHomeJumbos />
       {/* <BigSpace> */}
       <DeskHide>
         <ButtonsWrapper>
           <MainButton />
-          <SecondaryButton />
+          <SecondaryButton action={handleQuiz} setIsTest={setIsTest} />
         </ButtonsWrapper>
       </DeskHide>
       {/* </BigSpace> */}

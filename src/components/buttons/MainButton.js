@@ -48,7 +48,7 @@ const Button = styled.button`
     cursor: pointer;
   }
 
-  @keyframes TransitioningBackground {
+  @keyframes TB {
     0% {
       // background-: 1% 0%;
 
@@ -66,7 +66,7 @@ const Button = styled.button`
     100% {
       // background-position: 1% 0%;
       transform: translateX(300px) skewX(-15deg);
-      transition: 0s;
+      /* transition: 0s; */
     }
   }
   &::after {
@@ -83,7 +83,7 @@ const Button = styled.button`
     top: 0;
     // filter: blur(5px);
     transform: translateX(-100px) skewX(-15deg);
-    animation: TransitioningBackground 5s linear infinite;
+    animation: TB 5s linear infinite;
     // transition: 0.7s;
   }
 

@@ -58,7 +58,7 @@ const ImageWrapper = styled.div`
   height: 233px;
   overflow: hidden;
   margin-bottom: 16px;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 770px) {
     display: none;
   }
 `;
@@ -89,7 +89,7 @@ const Section = styled.div`
   display: grid;
   /* grid-gap: 0px; */
   align-content: space-between;
-  @media screen and (min-width: 450px) {
+  @media screen and (min-width: 769px) {
     margin: 80px 30px 0;
     /* margin: auto; */
     justify-content: start;
@@ -105,6 +105,11 @@ const Bonus = styled.div`
   align-items: end;
   justify-content: start;
   grid-gap: 20px;
+
+  @media screen and (max-width: 768px) {
+    margin: auto;
+    margin: 20px 0 0;
+  }
 `;
 
 const TextWrapper = styled.div`

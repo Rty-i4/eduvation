@@ -17,27 +17,24 @@ import Testimonials from "../components/testimonials/Testimonials";
 import Teachers from "../components/teachers/Teachers";
 import { H3 } from "../layout/TextStyles";
 import SecondaryButton from "../components/buttons/SecondaryButton";
+import { ButtonsWrapper } from "../layout/ButtonsWrapper";
 
 function NufypetPage() {
   return (
     <Wrapper>
       <PageHero
-        title={
-          <div>
-            NUFYP <br />
-            Entrance Test
-          </div>
-        }
+        title={<div>NUFYPET</div>}
         description={
           <div>
-            Подготовка для поступления <br />в НУ на программу <br />
-            Foundation
+            Подготовка для поступления <br />в НУ на программу Foundation{" "}
+            {/* <br /> */}
           </div>
         }
         image={NU}
         text="Получить план подготовки"
       />
       <CourseJumbo
+        reverse={true}
         mainText={
           <div>
             Комплексная <br />
@@ -81,16 +78,17 @@ function NufypetPage() {
               </ul>
             </div>
             <p style={{ textAlign: "left" }}>
-              <br /> Это позволит без лишнего стресса закончить 11-ый класс,
-              сдать все экзамены и ЕНТ, а при поступлении уже просто повторять
-              пройденный материал
+              <br /> Это позволит без лишнего стресса поступить в Назарбаев
+              Унверситет
             </p>
           </div>
         }
         image={Learning}
       />
-      <MainButton />
-      <SecondaryButton text="Получить план подготовки" />
+      <ButtonsWrapper>
+        <MainButton />
+        <SecondaryButton text="Получить план подготовки" />
+      </ButtonsWrapper>
       <Testimonials />
       <CourseJumbo
         mainText={<div>Интенсивные "Кампы"</div>}
@@ -118,9 +116,9 @@ function NufypetPage() {
         }
         image={Camp}
       />
-      <MainButton />
-      <SecondaryButton text="Получить план подготовки" />
+
       <CourseJumbo
+        reverse={true}
         mainText={
           <div>
             Математика и<br />
@@ -155,8 +153,10 @@ function NufypetPage() {
         }
         image={Crit}
       />
-      <MainButton />
-      <SecondaryButton text="Получить план подготовки" />
+      <ButtonsWrapper>
+        <MainButton />
+        <SecondaryButton text="Получить план подготовки" />
+      </ButtonsWrapper>
       <TextWrapper>
         <H3>Наши преподаватели</H3>
       </TextWrapper>

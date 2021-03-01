@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import { questions } from "../../Data/Questions";
@@ -12,7 +12,7 @@ import QuizCloseButton from "./QuizCloseButton";
 import pattern from "../../images/work-pattern.png";
 import rocket from "../../images/rocket.png";
 
-export default function Quiz({ isTest, handleQuiz }) {
+export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -24,6 +24,9 @@ export default function Quiz({ isTest, handleQuiz }) {
   const [showingScore, setShowingScore] = useState(false);
   const [quizForm, setQuizForm] = useState(false);
   const [lastQuestion, setLastQuestion] = useState(false);
+
+  const ref = useRef();
+  const quizRef = useRef();
 
   const incrementQuestion = (isCorrect, index) => {
     // if (isCorrect === true) {
@@ -96,7 +99,7 @@ export default function Quiz({ isTest, handleQuiz }) {
   };
 
   const handleNext = () => {
-    setVisible(!visible);
+    setVisible(false);
     setDisabled(true);
     const nextQuestion = currentQuestion + 1;
 
@@ -119,7 +122,8 @@ export default function Quiz({ isTest, handleQuiz }) {
   };
 
   const handlePrevious = () => {
-    setVisible(!visible);
+    // setVisible(!visible);
+    setVisible(false);
     setDisabled(true);
     const nextQuestion = currentQuestion - 1;
 
@@ -136,7 +140,6 @@ export default function Quiz({ isTest, handleQuiz }) {
       setDisabled(false);
     }, 1000);
   };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       //   console.log("This will run after 1 second!");
@@ -151,11 +154,35 @@ export default function Quiz({ isTest, handleQuiz }) {
     }, 800);
   }, [showScore]);
 
+  // Click outside refs
+
+  function handleClickOutside(event) {
+    if (
+      ref.current &&
+      !ref.current.contains(event.target) &&
+      !quizRef.current.contains(event.target)
+    ) {
+      // console.log("hello");
+      setVisible(true);
+      handleQuiz();
+      // setIsTest(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <BackLayer isTest={isTest}>
       {isTest ? (
-        <Container quizForm={quizForm} isTest={isTest}>
-          <QuizCloseButton handleQuiz={handleQuiz} />
+        <Container quizForm={quizForm} isTest={isTest} ref={quizRef}>
+          <QCBW ref={ref}>
+            <QuizCloseButton handleQuiz={handleQuiz} />
+          </QCBW>
           <ContentWrapper quizForm={quizForm} isTest={isTest}>
             {welcome ? (
               <QuizWelcomPage setWelcome={closeWelcome} />
@@ -259,11 +286,12 @@ const BackLayer = styled.div`
   top: 50%;
   left: 50%;
   /* transform: translate(-50%, -50%); */
-  z-index: 2;
+  z-index: 10;
   height: 100vh;
   min-height: 100%;
   min-height: -webkit-fill-available;
   width: 100vw;
+  min-width: 100%;
   backdrop-filter: blur(10px) saturate(100%);
   background: rgba(0, 0, 0, 0.3);
 
@@ -309,7 +337,7 @@ const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: auto 400px;
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     grid-template-columns: auto;
   }
 `;
@@ -338,7 +366,7 @@ const Section2 = styled.div`
   overflow: hidden;
   /* z-index: 0; */
   /* height: 593px; */
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
@@ -633,4 +661,10 @@ const TitleContainer = styled.div`
   opacity: ${(props) => (props.visible ? "1" : "0")};
   transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+`;
+
+const QCBW = styled.div`
+  position: absolute;
+  right: 40px;
+  top: -20px;
 `;

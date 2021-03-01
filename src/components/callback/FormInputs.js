@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import NumberFormat from "react-number-format";
 
 import ProfileImage from "../../images/Iconly/Bulk/Profile.svg";
 import CallingImage from "../../images/Iconly/Bulk/Calling.svg";
@@ -7,6 +9,13 @@ import Select from "./Select";
 import SendButton from "./SendButton";
 
 function FormInputs({ text, action }) {
+  const [emptyNumber, setEmptyNumber] = useState(false);
+
+  const changeColor = (e) => {
+    // e.preventDefault();
+    setEmptyNumber(true);
+  };
+
   return (
     <FormWrapper>
       <InputContainer>
@@ -15,16 +24,22 @@ function FormInputs({ text, action }) {
       </InputContainer>
       <InputContainer>
         <Img src={CallingImage} />
-        <Input
+        <NumberFormat
+          customInput={Input}
+          isNumericString={true}
+          format="+7 (###) ###-##-##"
+          mask="_"
+          allowEmptyFormatting
+          type="tel"
+          onChange={changeColor}
+          emptyNumber={emptyNumber}
+        />
+        {/* <Input
           type="tel"
           placeholder="+7 (***) *** ** **"
           maxLength="11"
-        ></Input>
+        ></Input> */}
       </InputContainer>
-      {/* <InputContainer>
-            <Img src={ArrowDown} />
-            <Input type="name" placeholder="- Выберите филиал -"></Input>
-          </InputContainer> */}
       <Select />
 
       <SendButton text={text} action={action} />
@@ -34,7 +49,7 @@ function FormInputs({ text, action }) {
 
 export default FormInputs;
 
-const FormWrapper = styled.div`
+const FormWrapper = styled.form`
   position: relative;
   display: grid;
   justify-content: center;
@@ -70,7 +85,9 @@ const Input = styled.input`
   font-weight: 500;
   font-size: 17px;
   line-height: 130%;
-  color: #4f4f4f;
+  /* color: #4f4f4f; */
+  color: ${(props) => (props.emptyNumber ? "#4f4f4f" : "#b1b1b1")};
+  /* color: #b1b1b1; */
   /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 16px;

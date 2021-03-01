@@ -32,7 +32,7 @@ export default CourseCard;
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 128px auto;
-  width: 335px;
+  max-width: 335px;
   background: #1e2127;
   height: 128px;
 

@@ -24,11 +24,15 @@ const Wrapper = styled.div`
   grid-template-columns: 50% 50%;
   grid-template-areas: "${(props) =>
     props.reverse ? "content image" : "image content"}";
-  margin: 100px 20px 60px;
+  margin: 100px 100px 60px;
+  @media screen and (max-width: 768px) {
+    margin: 100px 20px 60px;
+  }
+
   @media screen and (max-width: 450px) {
     grid-template-columns: auto;
     justify-self: center;
-    margin: 60px 20px 60px;
+    margin: 60px 20px 100px;
   }
 `;
 
