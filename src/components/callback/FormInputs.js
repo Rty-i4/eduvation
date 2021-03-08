@@ -12,7 +12,7 @@ function FormInputs({ text, action }) {
   const [emptyNumber, setEmptyNumber] = useState(false);
 
   const changeColor = (e) => {
-    // e.preventDefault();
+    // e.preventDefault(); idk
     setEmptyNumber(true);
   };
 
