@@ -215,8 +215,6 @@ const Input = styled.input`
   line-height: 130%;
   /* color: #4f4f4f; */
   color: ${(props) => (props.isEmpty ? "#4f4f4f" : "#b1b1b1")};
-  /* color: #b1b1b1; */
-  /* Note: backdrop-filter has minimal browser support */
 
   border-radius: 16px;
   height: 50px;
