@@ -143,3 +143,9 @@ export const Desc = styled.p`
     font-size: 18px;
   }
 `;
+
+export const SuccessText = styled.p`
+  color: lightgreen;
+  text-align: center;
+  margin-top: 20px;
+`;

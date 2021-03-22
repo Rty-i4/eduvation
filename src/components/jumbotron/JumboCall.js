@@ -5,9 +5,11 @@ import HomeJumbos from "./HomeJumbos";
 
 function JumboCall({ first }) {
   return (
-    <Wrapper>
+    <Wrapper id="heroCall">
+      {/* <div > */}
       <HomeJumbos first={first} />
       <Callback />
+      {/* </div> */}
     </Wrapper>
   );
 }

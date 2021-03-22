@@ -21,4 +21,8 @@ const CloseButton = styled.div`
   top: 30px;
   width: 36px;
   height: 36px;
+
+  @media screen and (max-width: 768px) {
+    top: 16px;
+  }
 `;

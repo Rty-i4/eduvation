@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function MainButton() {
+function MainButton({ mainAction }) {
   return (
     // <Wrapper>
-    <Button>
+    <Button onClick={mainAction}>
       <span>Записаться на пробный урок</span>
     </Button>
     // </Wrapper>

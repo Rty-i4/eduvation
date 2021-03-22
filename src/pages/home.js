@@ -4,12 +4,9 @@ import styled from "styled-components";
 import { H3, H1 } from "../layout/TextStyles";
 import MainButton from "../components/buttons/MainButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
-import Callback from "../components/callback/Callback";
-import CourseCard from "../components/Courses/CourseCard";
 
 import Results from "../components/Results/Results";
 import Testimonials from "../components/testimonials/Testimonials";
-import Jumbotron from "../components/jumbotron/Jumbotron";
 
 // Icons
 
@@ -34,9 +31,14 @@ const Home = () => {
   };
   return (
     <Wrapper>
-      <Hero action={handleQuiz} />
+      <Hero
+        action={handleQuiz}
+        // mainAction={}
+      />
       <Achievements />
+
       <JumboCall first={true} />
+
       <Space>
         <H1>Наши курсы</H1>
       </Space>

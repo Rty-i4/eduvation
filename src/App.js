@@ -22,31 +22,52 @@ import NufypetPage from "./pages/NufypetPage";
 import ScrollToTop from "./layout/ScrollToTop";
 import EnglishPage from "./pages/EnglishPage";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Layout>
-          <Router>
-            <ScrollToTop />
-            <Header />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/callback" component={Callback} />
-              <Route exact path="/ielts" component={IeltsPage} />
-              <Route exact path="/sat" component={SatPage} />
-              <Route exact path="/nufypet" component={NufypetPage} />
-              <Route exact path="/english" component={EnglishPage} />
-              <Route exact component={NotFoundPage} />
-            </Switch>
-          </Router>
+function App() {
+  // render() {
+  return (
+    <div>
+      <Layout>
+        <Router>
+          <ScrollToTop />
+          <Header />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/callback">
+              <Callback />
+            </Route>
+            <Route exact path="/ielts">
+              <IeltsPage />
+            </Route>
+            <Route exact path="/sat">
+              <SatPage />
+            </Route>
+            <Route exact path="/nufypet">
+              <NufypetPage />
+            </Route>
+            <Route exact path="/english">
+              <EnglishPage />
+            </Route>
+            <Route exact>
+              <NotFoundPage />
+            </Route>
+            {/* <Route exact path="/" component={Home} />
+            <Route exact path="/callback" component={Callback} />
+            <Route exact path="/ielts" component={IeltsPage} />
+            <Route exact path="/sat" component={SatPage} />
+            <Route exact path="/nufypet" component={NufypetPage} />
+            <Route exact path="/english" component={EnglishPage} />
+            <Route exact component={NotFoundPage} /> */}
+          </Switch>
+        </Router>
 
-          <Addresses />
-          <Copyright>© eduvation.kz</Copyright>
-        </Layout>
-      </div>
-    );
-  }
+        <Addresses />
+        <Copyright>© eduvation.kz</Copyright>
+      </Layout>
+    </div>
+  );
+  // }
 }
 
 export default App;

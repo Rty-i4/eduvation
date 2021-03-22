@@ -187,7 +187,12 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
             {welcome ? (
               <QuizWelcomPage setWelcome={closeWelcome} />
             ) : quizForm ? (
-              <QuizForm action={action} backToQuiz={backToQuiz} />
+              <QuizForm
+                action={action}
+                backToQuiz={backToQuiz}
+                score={score}
+                allQuestions={questions}
+              />
             ) : (
               <Section welcome={welcome}>
                 <Content>

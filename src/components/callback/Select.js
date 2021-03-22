@@ -20,6 +20,7 @@ const DropDownHeader = styled("div")`
   background: #ffffff;
   border-radius: 16px;
   height: 50px;
+  border: ${(props) => (props.isError ? "2px solid red" : "none")};
 
   :hover {
     cursor: pointer;
@@ -74,22 +75,29 @@ const Img = styled.img`
 
 const options = ["Nur-Sultan", "Almaty", "Atyrau", "Aktobe"];
 
-export default function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+export default function App({
+  selectedOption,
+  handleSelect,
+  toggling,
+  isOpen,
+  isError,
+}) {
+  // const [selectedOption, setSelectedOption] = useState(null);
 
-  const toggling = () => setIsOpen(!isOpen);
-
-  const onOptionClicked = (value) => () => {
-    setSelectedOption(value);
-    setIsOpen(false);
-    console.log(selectedOption);
-  };
+  // const onOptionClicked = (value) => () => {
+  //   setSelectedOption(value);
+  //   setIsOpen(false);
+  //   console.log(selectedOption);
+  // };
 
   return (
     // <Main>
     <DropDownContainer>
-      <DropDownHeader onClick={toggling} selectedOption={selectedOption}>
+      <DropDownHeader
+        onClick={toggling}
+        selectedOption={selectedOption}
+        isError={isError}
+      >
         {selectedOption || "- Выберите филиал -"}
         <Img src={ArrowDown} />
       </DropDownHeader>
@@ -97,7 +105,7 @@ export default function App() {
         <DropDownListContainer>
           <DropDownList>
             {options.map((option) => (
-              <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+              <ListItem onClick={handleSelect(option)} key={Math.random()}>
                 {option}
               </ListItem>
             ))}

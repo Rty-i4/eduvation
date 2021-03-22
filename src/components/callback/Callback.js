@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import FormInputs from "./FormInputs";
 
-function Callback() {
+function Callback({ subject }) {
   return (
     <Wrapper>
       <FristWrap>
@@ -16,7 +16,7 @@ function Callback() {
         </TextCall2>
       </FristWrap>
       <SecondWrap>
-        <FormInputs />
+        <FormInputs subject={subject} />
       </SecondWrap>
       <SmallText>Сегодня записалось 12 человек</SmallText>
     </Wrapper>

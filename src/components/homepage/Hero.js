@@ -6,7 +6,9 @@ import { HeroTitle } from "../../layout/TextStyles";
 import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 
-function Hero({ action }) {
+import { Link } from "react-scroll";
+
+function Hero({ action, mainAction }) {
   return (
     <Wrapper>
       <Img src={goknam} />
@@ -17,7 +19,16 @@ function Hero({ action }) {
           IELTS, SAT, NUFYPET
         </HeroTitle>
         <Buttons>
-          <MainButton />
+          <Link
+            activeClass="active"
+            to="heroCall"
+            spy={true}
+            smooth={true}
+            offset={-50}
+            duration={700}
+          >
+            <MainButton mainAction={mainAction} />
+          </Link>
           <SecondaryButton action={action} />
         </Buttons>
       </Section>

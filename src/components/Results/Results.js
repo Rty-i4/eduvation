@@ -9,7 +9,7 @@ function Results() {
 
       <Item>
         <H1>708</H1>
-        <Subtitle>студентов обучаютс сейчас</Subtitle>
+        <Subtitle>студентов обучаются сейчас</Subtitle>
       </Item>
       <Item>
         <H1>234</H1>
