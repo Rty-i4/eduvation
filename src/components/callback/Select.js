@@ -64,6 +64,10 @@ const ListItem = styled("li")`
     color: #4f4f4f;
     cursor: pointer;
   }
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const Img = styled.img`

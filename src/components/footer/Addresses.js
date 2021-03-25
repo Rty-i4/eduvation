@@ -44,7 +44,7 @@ function Addresses() {
           <H3>Мы в 4 городах</H3>
         </Title>
         <Img src={karta} />
-        <EndWrapper>
+        <EndWrapper id="contacts">
           {cities.map((city, index) => (
             <Address
               name={city.name}

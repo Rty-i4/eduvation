@@ -43,11 +43,12 @@ const Wrapper = styled.div`
   grid-template-columns: auto auto;
   grid-template-areas: "text image";
   align-items: center;
-  margin: 0 20px;
+  margin: 30px 20px;
   @media screen and (max-width: 768px) {
   }
 
   @media screen and (max-width: 450px) {
+    margin: 0 20px;
     grid-template-areas:
       "image"
       "text";
