@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { H1 } from "../layout/TextStyles";
 
@@ -14,20 +14,39 @@ import PageHero from "../components/PageHero/PageHero";
 import CourseJumbo from "../components/jumbotron/CourseJumbo";
 import Testimonials from "../components/testimonials/Testimonials";
 import { ButtonsWrapper } from "../layout/ButtonsWrapper";
+import Quiz2 from "../components/Quiz/Quiz2";
+import { callbackQuestions } from "../Data/CallbackQuestions";
 
 function IeltsPage() {
+  const [isTest, setIsTest] = useState(false);
+
+  const handleQuiz = () => {
+    setIsTest(!isTest);
+  };
+
+  // const
+
+  const closeQuiz = () => {
+    setIsTest(false);
+  };
   return (
     <Wrapper>
       <PageHero
         title="IELTS"
         description={
           <div>
-            Сдайте IELTS на 7.0+ <br />
+            Сдай IELTS на 7.0+ <br />
             по нашей уникальной программе
           </div>
         }
         image={Cambridge}
         text="Получить 500+ слов для IELTS"
+        action={handleQuiz}
+      />
+      <Quiz2
+        isTest={isTest}
+        handleQuiz={closeQuiz}
+        questions={callbackQuestions}
       />
       <Content>
         <CourseJumbo

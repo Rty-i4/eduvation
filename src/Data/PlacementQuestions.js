@@ -1,4 +1,5 @@
-export const placementQuestions = [
+// export const placementQuestions = [
+export const questions = [
   {
     questionText: "I _________ from France.",
     answerOptions: [
@@ -474,3 +475,32 @@ export const placementQuestions = [
     ],
   },
 ];
+
+// const resultMessage = (n) => {
+//   // 0-15 Beginner
+//   // 16-24 Elementary
+//   // 25-32 Pre-intermediate
+//   // 33-39 Intermediate
+//   // 40-45 Upper-intermediate / IELTS
+//   // 46-50 Advanced / IELTS
+
+//   switch (n) {
+//     case n < 16:
+//       "Рекомендуемый уровень Beginner";
+//       break;
+//     case n < 25:
+//       "Рекомендуемый уровень Elementary";
+//       break;
+//     case n < 33:
+//       "Рекомендуемый уровень Pre-intermediate";
+//       break;
+//     case n < 40:
+//       "Рекомендуемый уровень Intermediate";
+//       break;
+//     case n < 46:
+//       "Рекомендуемый уровень Upper-intermediate / IELTS";
+//       break;
+//     default:
+//       "Рекомендуемый курс IELTS";
+//   }
+// };

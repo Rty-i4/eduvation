@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
-// import { questions } from "../../Data/Questions";
-import { questions } from "../../Data/PlacementQuestions";
-
 import arrowRight from "../../images/arrow-right.svg";
 import arrowLeft from "../../images/arrow-left.svg";
 import QuizWelcomPage from "./QuizWelcomPage";
@@ -13,7 +10,13 @@ import QuizCloseButton from "./QuizCloseButton";
 import pattern from "../../images/work-pattern.png";
 import rocket from "../../images/rocket.png";
 
-export default function Quiz({ isTest, handleQuiz, setIsTest }) {
+export default function Quiz2({
+  isTest,
+  handleQuiz,
+  setIsTest,
+  subject,
+  questions,
+}) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -29,6 +32,84 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
 
   const ref = useRef();
   const quizRef = useRef();
+
+  const newCallback = {
+    name: "",
+    subject: `${subject || "-"}`,
+    city: ``,
+    phone: "",
+    mailTo: "renatilyasov95@gmail.com",
+    text: "-",
+    // score: `${score || "-"}`,
+    score: `${score ? `${score} из ${allQuestions.length}` : "-"}`,
+    result: score,
+  };
+
+  const [post, setPost] = useState(newCallback);
+
+  // TODO: handle  inputs
+
+  // TODO : Add callback !!!
+
+  const addCallback = (e) => {
+    e.preventDefault();
+    // switch (selectedOption) {
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "amityacademy@info.org"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "astanamerit@gmail.com"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
+    //     break;
+    // }
+
+    post.name.length < 3 ? setErrorName(true) : setErrorName(false);
+    // setErrors({ ...errors, nameError: "Введите правильное имя" });
+    post.phone.length < 18 ? setErrorPhone(true) : setErrorPhone(false);
+
+    selectedOption === null ? setErrorSelect(true) : setErrorSelect(false);
+    // setErrors({ ...errors, phoneError: "Введите правильный номер" });
+    score && setPost({ ...post, score: `${score} из ${allQuestions.length}` });
+    // if (errorName === false && errorPhone === false) {
+    if (
+      post.name.length < 3 ||
+      post.phone.length < 18 ||
+      selectedOption === null
+    ) {
+      console.log("wrong credentials", post.phone);
+      // {
+      //   action && action();
+      // }
+    } else {
+      // console.log(score, post.score);
+      console.log("success");
+      setIsLoading(true);
+      axios
+        .post("/callback", post)
+        .then((res) => {
+          // console.log(res.data.message);
+          // console.log(post);
+          setIsLoading(false);
+          setSuccess(true);
+          {
+            action && action();
+          }
+        })
+        .catch((err) => {
+          setResText("Попробуйте заново");
+          setSuccess(true);
+          setIsLoading(false);
+          console.log(err);
+        });
+    }
+  };
+
+  //
 
   const incrementQuestion = (isCorrect, index) => {
     // if (isCorrect === true) {
@@ -86,68 +167,6 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     setCurrentQuestion(0);
   };
 
-  // const handleLevel = (s) => {
-  //   switch (s) {
-  //     case s < 16:
-  //       setEnglishLevel("Beginner");
-  //       break;
-  //     case s < 25:
-  //       setEnglishLevel("Elementary");
-  //       break;
-  //     case s < 33:
-  //       setEnglishLevel("Pre-intermediate");
-  //       break;
-  //     case s < 40:
-  //       setEnglishLevel("Intermediate");
-  //       break;
-  //     case s < 46:
-  //       setEnglishLevel("Upper-intermediate / IELTS");
-  //       break;
-  //     default:
-  //       setEnglishLevel("IELTS");
-  //   }
-  // };
-
-  const calculateScore = () => {
-    var s = 0;
-    var i;
-    for (i = 0; i < questions.length; i++) {
-      allQuestions[i].answerOptions.map((answerOption) => {
-        if (answerOption.isSelected && answerOption.isCorrect) {
-          // setScore(score + 1);
-          s = s + 1;
-        }
-      });
-    }
-    setScore(s);
-
-    switch (true) {
-      case s < 16:
-        setEnglishLevel("Beginner");
-        console.log(englishLevel);
-        break;
-      case s < 25:
-        setEnglishLevel("Elementary");
-        console.log(englishLevel);
-        break;
-      case s < 33:
-        setEnglishLevel("Pre-intermediate");
-        console.log(englishLevel);
-        break;
-      case s < 40:
-        setEnglishLevel("Intermediate");
-        console.log(englishLevel);
-        break;
-      case s < 46:
-        setEnglishLevel("Upper-intermediate / IELTS");
-        console.log(englishLevel);
-        break;
-      default:
-        console.log(englishLevel, s);
-        setEnglishLevel("IELTS");
-    }
-  };
-
   const handleNext = () => {
     setVisible(false);
     setDisabled(true);
@@ -156,18 +175,19 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     if (nextQuestion < questions.length) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
-      calculateScore();
+      // calculateScore();
       // handleLevel(score);
-      setQuizForm(true);
-
+      // setQuizForm(true);
       //   }, 400);
+      // action = { action };
+      setShowScore(true);
     }
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
 
   const handlePrevious = () => {
@@ -179,7 +199,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     if (nextQuestion < questions.length && nextQuestion > -1) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
       setCurrentQuestion(0);
       setVisible(true);
@@ -187,13 +207,13 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
   useEffect(() => {
     const timer = setTimeout(() => {
       //   console.log("This will run after 1 second!");
       setVisible(!visible);
-    }, 400);
+    }, 300);
     return () => clearTimeout(timer);
   }, [currentQuestion]);
 
@@ -235,18 +255,20 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
           <ContentWrapper quizForm={quizForm} isTest={isTest}>
             {welcome ? (
               <QuizWelcomPage setWelcome={closeWelcome} />
-            ) : quizForm ? (
-              <QuizForm
-                action={action}
-                backToQuiz={backToQuiz}
-                score={score}
-                allQuestions={questions}
-              />
             ) : (
+              // :
+              //  quizForm ? (
+              //   <QuizForm
+              //     action={action}
+              //     backToQuiz={backToQuiz}
+              //     score={score}
+              //     allQuestions={questions}
+              //   />
+              // )
               <Section welcome={welcome}>
                 <Content>
                   <TitleWrapper>
-                    <P>Placement test</P>
+                    <P>Мини опрос</P>
 
                     <P>
                       {currentQuestion + 1}/{questions.length}
@@ -262,21 +284,36 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
                         <h4
                           style={{
                             color: "#fff",
-                            fontWeight: 600,
+                            fontWeight: 700,
+                            fontSize: "22px",
                             margin: "32px",
                             textAlign: "center",
                             lineHeight: "140%",
                           }}
                         >
-                          {score} из {questions.length}
+                          Ваша заявка принята!
                           <br />
-                          Рекомендуемый уровень <br /> {englishLevel}
+                          <p
+                            style={{
+                              color: "#e0e0e0",
+                              fontSize: "16px",
+                              lineHeight: "130%",
+                              paddingTop: "16px",
+                              fontWeight: 500,
+                            }}
+                          >
+                            Мы свяжемся с вами в ближайшее время
+                          </p>
                         </h4>
                         <Button2
                           visible={"true"}
-                          onClick={() => handleTryAgain()}
+                          // onClick={() => handleTryAgain()}
+                          onClick={() => {
+                            handleTryAgain();
+                            handleQuiz();
+                          }}
                         >
-                          Try again
+                          Ок
                         </Button2>
                       </Score>
                     </>
@@ -290,24 +327,32 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
                         </TitleContainer>
 
                         {allQuestions[currentQuestion].answerOptions.map(
-                          (answerOption, index) => (
-                            <Button
-                              key={index}
-                              visible={visible}
-                              isSelected={answerOption.isSelected}
-                              disabled={disabled}
-                              onClick={() =>
-                                incrementQuestion(
-                                  answerOption.isCorrect,
-                                  //   answerOption.isSelected
-                                  index
-                                )
-                              }
-                            >
-                              <Circle isSelected={answerOption.isSelected} />
-                              {answerOption.answerText}
-                            </Button>
-                          )
+                          (answerOption, index) =>
+                            answerOption.isInput ? (
+                              <Input
+                                type={answerOption.type}
+                                placeholder={answerOption.placeholder}
+                                key={index}
+                                visible={visible}
+                              />
+                            ) : (
+                              <Button
+                                key={index}
+                                visible={visible}
+                                isSelected={answerOption.isSelected}
+                                disabled={disabled}
+                                onClick={() =>
+                                  incrementQuestion(
+                                    answerOption.isCorrect,
+                                    //   answerOption.isSelected
+                                    index
+                                  )
+                                }
+                              >
+                                <Circle isSelected={answerOption.isSelected} />
+                                {answerOption.answerText}
+                              </Button>
+                            )
                         )}
                       </QuestionCard>
                       <Buttons>
@@ -422,7 +467,7 @@ const Section = styled.div`
   position: relative;
   opacity: 0;
   transform: scale(0.97);
-  animation: TransitioningBackground 0.5s ease-out 0.1s 1 normal forwards;
+  animation: TransitioningBackground 0.3s ease-out 0.1s 1 normal forwards;
 `;
 
 const Section2 = styled.div`
@@ -486,7 +531,7 @@ const QuestionTitle = styled.h3`
   /* visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
   transform: translateX(${(props) => (props.visible ? "0px" : "-30px")}); */
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 `;
 
 const Button = styled.button`
@@ -509,8 +554,8 @@ const Button = styled.button`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   :hover {
     div {
@@ -518,6 +563,48 @@ const Button = styled.button`
     }
   }
 `;
+
+const Input = styled.input`
+  width: 90%;
+  font-size: 16px;
+  color: #fff;
+  font-family: "Gilroy";
+  font-weight: 500;
+  background-color: #1e2127;
+  border-radius: 10px;
+  border: solid;
+  border-width: ${(props) => (props.isSelected ? "2px" : "2px")};
+  border-color: ${(props) => (props.isSelected ? "#fff" : "#0d0d0d")};
+  display: flex;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.visible ? "1" : "0")};
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+
+  /* :hover {
+    div {
+      background-color: #fff;
+    }
+  } */
+
+  ::placeholder {
+    color: #b1b1b1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 320px) {
+    width: 75vw;
+  }
+`;
+
 const Circle = styled.div`
   width: 20px;
   height: 20px;
@@ -725,8 +812,8 @@ const TitleContainer = styled.div`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transform: translateX(${(props) => (props.visible ? "0px" : "-8px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 `;
 
 const QCBW = styled.div`

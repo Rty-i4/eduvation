@@ -139,7 +139,7 @@ const Menu = styled.div`
   right: 20px;
   z-index: 20;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 769px) {
     display: none;
   }
 `;
@@ -238,12 +238,12 @@ const MenuDesktop = styled.div`
   gap: 30px;
   grid-template-columns: repeat(${(props) => props.count}, auto);
   margin-top: 34px;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 840px) {
     gap: 8px;
     font-size: 15px;
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;

@@ -20,9 +20,11 @@ const Button = styled.button`
   width: 300px;
   height: 44px;
 
-  background: #34435e;
-  border-radius: 30px;
-
+  /* background: #34435e; */
+  background: transparent;
+  /* border-radius: 30px; */
+  border-radius: 8px;
+  border: 2px solid green;
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
@@ -31,6 +33,7 @@ const Button = styled.button`
 
   :hover {
     cursor: pointer;
+    color: lightgreen;
   }
 
   @media screen and (max-width: 450px) {

@@ -15,13 +15,16 @@ const Button = styled.button`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 24px;
+  margin-top: 40px;
+  /* margin-bottom: 20px; */
 
-  width: 180px;
+  width: 290px;
+  /* width: 180px; */
   height: 50px;
 
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
-  border-radius: 30px;
+  /* border-radius: 30px; */
+  border-radius: 8px;
 
   font-size: 16px;
   line-height: 20px;
@@ -36,6 +39,9 @@ const Button = styled.button`
   box-shadow: 0px 4px 8px rgba(107, 182, 50, 0.3);
   :hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 320px) {
+    width: 80vw;
   }
 `;
 

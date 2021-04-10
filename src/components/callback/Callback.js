@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   /* margin: 40px 20px 120px; */
   /* width: 432px; */
   /* margin: 120px auto; */
+  margin: 0 10px;
   height: 620px;
 
   @media screen and (min-width: 768px) {
@@ -51,12 +52,13 @@ const FristWrap = styled.div`
   /* height: 140px; */
   background-color: #34435e;
   border-radius: 16px 16px 0 0;
+  border-radius: 8px 8px 0 0;
 `;
 
 const SecondWrap = styled.div`
   height: 400px;
   background-color: #1e2127;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 8px 8px;
 `;
 
 const TextCall = styled.p`

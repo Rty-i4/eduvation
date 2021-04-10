@@ -8,7 +8,7 @@ import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { ButtonsWrapper } from "../../layout/ButtonsWrapper";
 
-function PageHero({ title, description, image, text }) {
+function PageHero({ title, description, image, text, action }) {
   return (
     <Wrapper>
       <HeroSection>
@@ -19,7 +19,7 @@ function PageHero({ title, description, image, text }) {
             <H3>{description}</H3>
             {/* <ButtonsWrapper> */}
             <Buttons>
-              <MainButton />
+              <MainButton mainAction={action} />
               <SecondaryButton text={text} />
             </Buttons>
             {/* </ButtonsWrapper> */}
@@ -35,7 +35,9 @@ export default PageHero;
 const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
-  height: 500px;
+  /* height: 500px; */
+  height: 80vh;
+  max-height: 700px;
 
   @media screen and (min-width: 450px) {
     height: 600px;
@@ -43,7 +45,7 @@ const Wrapper = styled.div`
 `;
 
 const HeroSection = styled.div`
-  position: relative;
+  /* position: relative; */
 `;
 
 const HeroText = styled.div`
@@ -59,7 +61,7 @@ const HeroText = styled.div`
 `;
 
 const HeroImage = styled.div`
-  height: 500px;
+  height: 700px;
   background: url(${({ image }) => image});
   /* display: block;
   margin-left: auto;
@@ -95,6 +97,6 @@ const Buttons = styled.div`
   @media screen and (max-width: 768px) {
     grid-template-columns: auto;
     grid-gap: 0px;
-    margin-top: 0px;
+    /* margin-top: 100px; */
   }
 `;

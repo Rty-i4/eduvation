@@ -18,19 +18,24 @@ function QuizWelcomPage({ setWelcome }) {
       <Section>
         <TextWrapper>
           <H3 align={true}>
-            Хотите проверить свой <br />
-            уровень английского?
+            Хочешь учиться в лучших <br />
+            университетах мира?
+            {/* Хотите проверить свой <br />
+            уровень английского? */}
           </H3>
           <Desc align={true}>
-            Пройди тест и подбери подходящий
+            Пройди опрос и получи
             <br />
-            формат обучения
+            консультацию от специалистов
+            {/* Пройди тест и подбери подходящий
+            <br />
+            формат обучения */}
           </Desc>
           <StartQuizButton setWelcome={setWelcome} />
         </TextWrapper>
 
         <Bonus>
-          <Img src={gift} />{" "}
+          <Img src={gift} />
           <SmallText>
             Бонус после прохождения теста <br /> Скидка 10%
           </SmallText>
@@ -49,6 +54,9 @@ const Wrapper = styled.div`
   margin: 16px 16px;
   /* opacity: ${(props) => (props.visibility ? "1" : "0")}; */
   transition: 0.8s all ease-in;
+  @media screen and (max-width: 320px) {
+    display: grid;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -59,6 +67,10 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   margin-bottom: 16px;
   @media screen and (min-width: 770px) {
+    display: none;
+  }
+
+  @media screen and (max-width: 320px) {
     display: none;
   }
 `;

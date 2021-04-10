@@ -29,7 +29,7 @@ function QuizForm({ action, backToQuiz, score, allQuestions }) {
 export default QuizForm;
 
 const Wrapper = styled.div`
-  margin: 20px;
+  margin: 20px auto;
   @keyframes TransitioningBackground {
     0% {
       opacity: 0;
@@ -51,6 +51,10 @@ const Img = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
+
+  @media screen and (max-width: 320px) {
+    display: none;
+  }
 `;
 
 const ButtonBack = styled.button`

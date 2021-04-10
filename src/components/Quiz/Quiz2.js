@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-import { questions } from "../../Data/Questions";
+import NumberFormat from "react-number-format";
 
 import arrowRight from "../../images/arrow-right.svg";
 import arrowLeft from "../../images/arrow-left.svg";
 import QuizWelcomPage from "./QuizWelcomPage";
 import QuizForm from "./QuizForm";
+import QuizCloseButton from "./QuizCloseButton";
 
-export default function Quiz2() {
+import pattern from "../../images/work-pattern.png";
+import rocket from "../../images/rocket.png";
+
+export default function Quiz2({
+  isTest,
+  handleQuiz,
+  setIsTest,
+  subject,
+  questions,
+}) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -19,23 +30,354 @@ export default function Quiz2() {
   const [disabled, setDisabled] = useState(false);
   const [showingScore, setShowingScore] = useState(false);
   const [quizForm, setQuizForm] = useState(false);
+  const [lastQuestion, setLastQuestion] = useState(false);
+  const [englishLevel, setEnglishLevel] = useState("");
 
-  const incrementQuestion = (isCorrect, index) => {
+  // from form inputs
+
+  const [emptyNumber, setEmptyNumber] = useState(false);
+  const [emptyName, setEmptyName] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [errorName, setErrorName] = useState(false);
+  const [errorPhone, setErrorPhone] = useState(false);
+  const [errorSelect, setErrorSelect] = useState(false);
+  const [loading, setIsLoading] = useState(false);
+  const [resText, setResText] = useState("Заявка принята!");
+
+  // post
+  const [year, setYear] = useState("");
+  const [time, setTime] = useState("");
+  const [name, setName] = useState("");
+  const [levelOfEnglish, setLevelOfEnglish] = useState("");
+  const [city, setCity] = useState("");
+  const [certificate, setCertificate] = useState("");
+  const [phone, setPhone] = useState("");
+
+  // end
+
+  const ref = useRef();
+  const quizRef = useRef();
+
+  const newCallback = {
+    name: name,
+    subject: subject,
+    city: city,
+    phone: phone,
+    mailTo: "renatilyasov95@gmail.com",
+    text: "-",
+    levelOfEnglish: levelOfEnglish,
+    time: time,
+    certificate: certificate,
+    // score: `${score || "-"}`,
+    // score: `${score ? `${score} из ${allQuestions.length}` : "-"}`,
+    // result: score,
+  };
+
+  const [post, setPost] = useState(newCallback);
+  // const [name, setName] = useState("");
+  // TODO: handle  inputs
+  const [inputValue, setInputValue] = useState("");
+
+  const handleName = (e) => {
+    // setEmptyName(true);
+    const value = e.target.value;
+    // setInputValue(e.target.value);
+    switch (currentQuestion) {
+      case 1:
+        setName(value);
+        setPost({
+          ...post,
+          name: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        // setInputValue(city);
+        // setPost({ ...post, city: value });
+        break;
+      case 2:
+        setCity(value);
+        setPost({
+          ...post,
+          city: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        // setInputValue(name);
+        // setPost({ ...post, name: value });
+        break;
+      case 3:
+        setYear(value);
+        setPost({
+          ...post,
+          year: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        // setInputValue(year);
+        // setPost({ ...post, year: value });
+        break;
+      case 4:
+        setCertificate(value);
+        // setInputValue(certificate);
+        // setPost({ ...post, certificate: value });
+        setPost({
+          ...post,
+          certificate: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        break;
+      case 6:
+        setTime(value);
+        setPost({
+          ...post,
+          time: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        // setInputValue(time);
+        // setPost({ ...post, time: value });
+        break;
+      case 7:
+        setPhone(value);
+        setPost({
+          ...post,
+          phone: e.target.value,
+          // add city state city: city;
+          // allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        // setInputValue(phone);
+        // setPost({ ...post, phone: value });
+        break;
+
+      default:
+        break;
+    }
+
+    setName(e.target.value);
+    post.name.length > 2 && setErrorName(false);
+
+    // console.log(e.target.value);/
+  };
+  const handleSubject = (e) => {
+    // setPost({ ...post, name: e.target.value });
+    console.log(e.target.value);
+  };
+
+  const handlePhone = (e) => {
+    setEmptyNumber(true);
+    setPost({ ...post, phone: e.target.value });
+    post.phone.length === 18 && setErrorPhone(false);
+  };
+
+  // TODO : Add callback !!!
+
+  const addCallback = (e) => {
+    // e.preventDefault();
+    // switch (selectedOption) {
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "amityacademy@info.org"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "astanamerit@gmail.com"});
+    //     break;
+    //   case "Nur-Sultan":
+    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
+    //     break;
+    // }
+
+    post.name.length < 3 ? setErrorName(true) : setErrorName(false);
+    // setErrors({ ...errors, nameError: "Введите правильное имя" });
+    post.phone.length < 18 ? setErrorPhone(true) : setErrorPhone(false);
+
+    selectedOption === null ? setErrorSelect(true) : setErrorSelect(false);
+    // setErrors({ ...errors, phoneError: "Введите правильный номер" });
+    score && setPost({ ...post, score: `${score} из ${allQuestions.length}` });
+    // if (errorName === false && errorPhone === false) {
+    if (
+      // post.name.length < 3 ||
+      post.phone.length < 18
+      // ||
+      // selectedOption === null
+    ) {
+      console.log("wrong credentials", post.phone);
+      // {
+      //   action && action();
+      // }
+    } else {
+      // console.log(score, post.score);
+      console.log("success");
+      setIsLoading(true);
+      axios
+        .post("/callback", post)
+        .then((res) => {
+          // console.log(res.data.message);
+          // console.log(post);
+          setIsLoading(false);
+          setSuccess(true);
+          {
+            action && action();
+          }
+        })
+        .catch((err) => {
+          setResText("Попробуйте заново");
+          setSuccess(true);
+          setIsLoading(false);
+          console.log(err);
+        });
+    }
+
+    console.log("success");
+    setIsLoading(true);
+    axios
+      .post("/callback", post)
+      .then((res) => {
+        // console.log(res.data.message);
+        // console.log(post);
+        setIsLoading(false);
+        setSuccess(true);
+        {
+          action && action();
+        }
+      })
+      .catch((err) => {
+        setResText("Попробуйте заново");
+        setSuccess(true);
+        setIsLoading(false);
+        console.log(err);
+      });
+  };
+
+  // handle post
+
+  const makeSelected = (index) => {
     allQuestions[currentQuestion].answerOptions.map((answerOption, i) => {
       i === index
         ? (answerOption.isSelected = true)
         : (answerOption.isSelected = false);
     });
+
     const selectedQ = (allQuestions[currentQuestion].answerOptions[
       index
     ].isSelected = true);
+
     setAllQuestions({ ...allQuestions, selectedQ });
-    handleNext(isCorrect);
+  };
+
+  const incrementQuestion = (isCorrect, index) => {
+    // makeSelected(index);
+
+    switch (currentQuestion) {
+      case 0:
+        setPost({
+          ...post,
+          subject:
+            allQuestions[currentQuestion].answerOptions[index].answerText,
+        });
+        break;
+
+      case 1:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              name:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        break;
+      case 2:
+        if (allQuestions[currentQuestion].answerOptions[index].isInput) {
+          setPost({
+            ...post,
+          });
+        } else {
+          setPost({
+            ...post,
+            city: allQuestions[currentQuestion].answerOptions[index].answerText,
+          });
+        }
+        break;
+      case 3:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              year:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        break;
+      case 4:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              certificate:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        console.log(post);
+        break;
+      case 5:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              levelOfEnglish:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        break;
+      case 6:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              time:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        console.log(post);
+        break;
+      case 7:
+        allQuestions[currentQuestion].answerOptions[index].isInput
+          ? setPost({
+              ...post,
+            })
+          : setPost({
+              ...post,
+              phone:
+                allQuestions[currentQuestion].answerOptions[index].answerText,
+            });
+        break;
+
+      default:
+        break;
+    }
+
+    if (currentQuestion !== allQuestions.length - 1) {
+      handleNext();
+    }
   };
 
   const action = () => {
     setQuizForm(false);
     setShowScore(true);
+  };
+
+  const backToQuiz = () => {
+    setQuizForm(false);
+    setVisible(true);
   };
 
   const closeWelcome = () => {
@@ -64,42 +406,39 @@ export default function Quiz2() {
   };
 
   const handleNext = () => {
-    setVisible(!visible);
+    setVisible(false);
     setDisabled(true);
     const nextQuestion = currentQuestion + 1;
 
     if (nextQuestion < questions.length) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
-      allQuestions.map((question) => {
-        question.answerOptions.map((answerOption) => {
-          answerOption.isCorrect === answerOption.isSelected
-            ? setScore(score + 1)
-            : setScore(score);
-        });
-      });
-      setTimeout(function () {
-        // setShowScore(true);
-        setQuizForm(true);
-      }, 400);
+      // calculateScore();
+      // handleLevel(score);
+      // setQuizForm(true);
+      //   }, 400);
+      // action = { action };
+      console.log(post);
+      addCallback();
+      setShowScore(true);
     }
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
 
   const handlePrevious = () => {
-    setVisible(!visible);
+    setVisible(false);
     setDisabled(true);
     const nextQuestion = currentQuestion - 1;
 
     if (nextQuestion < questions.length && nextQuestion > -1) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
       setCurrentQuestion(0);
       setVisible(true);
@@ -107,144 +446,276 @@ export default function Quiz2() {
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
-
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       //   console.log('This will run every second!');
-  //       setVisible(!visible);
-  //     }, 1000);
-  //     return () => clearInterval(interval);
-  //   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       //   console.log("This will run after 1 second!");
       setVisible(!visible);
-    }, 400);
+    }, 300);
     return () => clearTimeout(timer);
   }, [currentQuestion]);
 
   useEffect(() => {
-    allQuestions.map((question) => {
-      question.answerOptions.map();
-    });
-
     setTimeout(function () {
       setShowingScore(!showingScore);
     }, 800);
   }, [showScore]);
 
-  // Custom
+  // Click outside refs
+
+  function handleClickOutside(event) {
+    if (
+      ref.current &&
+      !ref.current.contains(event.target) &&
+      !quizRef.current.contains(event.target)
+    ) {
+      // console.log("hello");
+      setVisible(true);
+      handleQuiz();
+      // setIsTest(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Container quizForm={quizForm}>
-      {welcome ? (
-        <QuizWelcomPage setWelcome={closeWelcome} />
-      ) : quizForm ? (
-        <QuizForm action={action} />
-      ) : (
-        <Section welcome={welcome}>
-          <Content>
-            <TitleWrapper>
-              <P>Placement test</P>
-
-              <P>
-                {currentQuestion + 1}/{questions.length}
-              </P>
-            </TitleWrapper>
-            <Hr />
-            {showScore ? (
-              <>
-                <Score showScore={showingScore}>
-                  {/* <img src={Check} /> */}
-                  <CheckWrapper>
-                    <CheckMark />
-                  </CheckWrapper>
-                  <h4
-                    style={{ color: "#fff", fontWeight: 500, margin: "32px" }}
-                  >
-                    You scored {score} out of {questions.length}
-                  </h4>
-                  <Button2 visible={"true"} onClick={() => handleTryAgain()}>
-                    Try again
-                  </Button2>
-                </Score>
-              </>
+    <BackLayer isTest={isTest}>
+      {isTest ? (
+        <Container quizForm={quizForm} isTest={isTest} ref={quizRef}>
+          <QCBW ref={ref}>
+            <QuizCloseButton handleQuiz={handleQuiz} />
+          </QCBW>
+          <ContentWrapper quizForm={quizForm} isTest={isTest}>
+            {welcome ? (
+              <QuizWelcomPage setWelcome={closeWelcome} />
             ) : (
-              <>
-                <QuestionCard isVisible={questionVisible}>
-                  <TitleContainer visible={visible}>
-                    <QuestionTitle visible={visible}>
-                      {allQuestions[currentQuestion].questionText}
-                    </QuestionTitle>
-                  </TitleContainer>
+              <Section welcome={welcome}>
+                <Content>
+                  <TitleWrapper>
+                    <P>Мини опрос</P>
 
-                  {allQuestions[currentQuestion].answerOptions.map(
-                    (answerOption, index) => (
-                      <Button
-                        key={index}
-                        visible={visible}
-                        isSelected={answerOption.isSelected}
-                        disabled={disabled}
-                        onClick={() =>
-                          incrementQuestion(
-                            answerOption.isCorrect,
-                            //   answerOption.isSelected
-                            index
-                          )
-                        }
+                    <P>
+                      {currentQuestion + 1}/{questions.length}
+                    </P>
+                  </TitleWrapper>
+                  <Hr />
+                  {showScore ? (
+                    <>
+                      <Score showScore={showingScore}>
+                        <CheckWrapper>
+                          <CheckMark />
+                        </CheckWrapper>
+                        <h4
+                          style={{
+                            color: "#fff",
+                            fontWeight: 700,
+                            fontSize: "22px",
+                            margin: "32px",
+                            textAlign: "center",
+                            lineHeight: "140%",
+                          }}
+                        >
+                          Ваша заявка принята!
+                          <br />
+                          <p
+                            style={{
+                              color: "#e0e0e0",
+                              fontSize: "16px",
+                              lineHeight: "130%",
+                              paddingTop: "16px",
+                              fontWeight: 500,
+                            }}
+                          >
+                            Мы свяжемся с вами в ближайшее время
+                          </p>
+                        </h4>
+                        <Button2
+                          visible={"true"}
+                          // onClick={() => handleTryAgain()}
+                          onClick={() => {
+                            handleTryAgain();
+                            handleQuiz();
+                          }}
+                        >
+                          Ок
+                        </Button2>
+                      </Score>
+                    </>
+                  ) : (
+                    <>
+                      <QuestionCard isVisible={questionVisible}>
+                        <TitleContainer visible={visible}>
+                          <QuestionTitle visible={visible}>
+                            {allQuestions[currentQuestion].questionText}
+                          </QuestionTitle>
+                        </TitleContainer>
+
+                        {allQuestions[currentQuestion].answerOptions.map(
+                          (answerOption, index) =>
+                            currentQuestion === 7 ? (
+                              <NumberFormat
+                                customInput={Input}
+                                isNumericString={true}
+                                format="+7 (###) ###-##-##"
+                                mask="_"
+                                allowEmptyFormatting
+                                type="tel"
+                                onChange={handlePhone}
+                                visible={visible}
+                                isError={errorPhone}
+                                isEmpty={emptyNumber}
+                                key={index}
+                                required
+                              />
+                            ) : answerOption.isInput ? (
+                              <Input
+                                type={answerOption.type}
+                                placeholder={answerOption.placeholder}
+                                key={index}
+                                visible={visible}
+                                isSelected={answerOption.isSelected}
+                                onFocus={() => {
+                                  makeSelected(index);
+                                }}
+                                onChange={handleName}
+                                value={
+                                  currentQuestion === 1
+                                    ? name
+                                    : currentQuestion === 2
+                                    ? city
+                                    : currentQuestion === 3
+                                    ? year
+                                    : currentQuestion === 4
+                                    ? certificate
+                                    : currentQuestion === 6
+                                    ? time
+                                    : currentQuestion === 7
+                                    ? phone
+                                    : inputValue
+                                }
+                              />
+                            ) : (
+                              <Button
+                                key={index}
+                                visible={visible}
+                                isSelected={answerOption.isSelected}
+                                disabled={disabled}
+                                onClick={() => {
+                                  incrementQuestion(
+                                    answerOption.isCorrect,
+                                    //   answerOption.isSelected
+                                    index
+                                  );
+                                }}
+                              >
+                                <Circle isSelected={answerOption.isSelected} />
+                                {answerOption.answerText}
+                              </Button>
+                            )
+                        )}
+                      </QuestionCard>
+                      <Buttons>
+                        <ButtonBack
+                          onClick={() => handlePrevious()}
+                          disabled={disabled}
+                        >
+                          <img src={arrowLeft} alt="arrow-left" />
+                        </ButtonBack>
+                        <ButtonNext
+                          onClick={() => handleNext()}
+                          disabled={disabled}
+                        >
+                          Next <img src={arrowRight} alt="arrow-right" />
+                        </ButtonNext>
+                      </Buttons>
+                      {/* <button
+                        onClick={() => {
+                          setCurrentQuestion(49);
+                        }}
                       >
-                        <Circle isSelected={answerOption.isSelected} />
-                        {answerOption.answerText}
-                      </Button>
-                    )
+                        Last
+                      </button> */}
+                    </>
                   )}
-                </QuestionCard>
-                <Buttons>
-                  <ButtonBack
-                    onClick={() => handlePrevious()}
-                    disabled={disabled}
-                  >
-                    <img src={arrowLeft} alt="arrow-left" />
-                  </ButtonBack>
-                  <ButtonNext onClick={() => handleNext()} disabled={disabled}>
-                    Next <img src={arrowRight} alt="arrow-right" />
-                  </ButtonNext>
-                </Buttons>
-              </>
+                </Content>
+              </Section>
             )}
-          </Content>{" "}
-        </Section>
-      )}
-      {/* <Section2>
-        <Pattern src={pattern} />
-        <RocketImg src={rocket} />
-      </Section2> */}
-    </Container>
+            <Section2>
+              <Pattern src={pattern} />
+              <RocketImg src={rocket} />
+            </Section2>
+          </ContentWrapper>
+        </Container>
+      ) : null}
+    </BackLayer>
   );
 }
+const BackLayer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  z-index: 30;
+  height: 100vh;
+  min-height: 100%;
+  min-height: -webkit-fill-available;
+  width: 100vw;
+  min-width: 100%;
+  backdrop-filter: blur(10px) saturate(100%);
+  background: rgba(0, 0, 0, 0.3);
 
+  transform: translate(-50%, ${(props) => (props.isTest ? "-50%" : "-47%")});
+  opacity: ${(props) => (props.isTest ? 1 : 0)};
+  visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
+  transition: all 0.3s ease-in-out;
+`;
 const Container = styled.div`
-  /* width: 100%; */
-  /* min-width: 900px; */
-  /* width: 1200px; */
-  /* background-color: #fff; */
-  margin: 40px 20px;
-  height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: #0d0d0d;
+  width: 94%;
+  max-width: 1024px;
+  /* margin: 40px 20px; */
+  max-height: 600px;
+  height: 90vh;
+
   border: 4px solid #1e2127;
   border-radius: 20px;
   display: grid;
+  visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
   /* grid-template-columns: auto 490px; */
   /* filter: drop-shadow(0px 20px 40px rgba(108, 105, 117, 0.5)); */
   /* box-shadow: 0px 20px 40px rgba(108, 105, 117, 0.15); */
   /* overflow-x: hidden; */
-  overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")};
-
+  /* overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")}; */
   /* @media screen and (max-width: 500px) {
     width: 300px;
   } */
+`;
+
+const ContentWrapper = styled.div`
+  height: inherit;
+  width: 100%;
+  overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")};
+  display: inherit;
+  visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
+  /* overflow: hidden; */
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 400px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: auto;
+  }
 `;
 
 const Section = styled.div`
@@ -261,12 +732,19 @@ const Section = styled.div`
   position: relative;
   opacity: 0;
   transform: scale(0.97);
-  animation: TransitioningBackground 0.5s ease-out 0.1s 1 normal forwards;
+  animation: TransitioningBackground 0.3s ease-out 0.1s 1 normal forwards;
 `;
 
 const Section2 = styled.div`
   position: relative;
-  background: linear-gradient(314.94deg, #4e59f5 0%, #ad95f8 100%);
+  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
+  border-radius: 0 16px 16px 0;
+  overflow: hidden;
+  /* z-index: 0; */
+  /* height: 593px; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Pattern = styled.img`
@@ -318,7 +796,11 @@ const QuestionTitle = styled.h3`
   /* visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
   transform: translateX(${(props) => (props.visible ? "0px" : "-30px")}); */
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+
+  @media screen and (max-width: 320px) {
+    margin: 20px 0;
+  }
 `;
 
 const Button = styled.button`
@@ -327,51 +809,78 @@ const Button = styled.button`
   color: #fff;
   font-family: "Gilroy";
   font-weight: 500;
-  /* background-color: #fff; */
-  /* background-color: ${(props) => (props.isSelected ? "#e0e1ff" : "#fff")}; */
-  /* background-color: ${(props) =>
-    props.isSelected ? "#EBECFF" : "#1E2127"}; */
   background-color: #1e2127;
   border-radius: 10px;
   border: solid;
   border-width: ${(props) => (props.isSelected ? "2px" : "2px")};
-  /* border-color: ${(props) => (props.isSelected ? "#42A132" : "#0d0d0d")}; */
   border-color: ${(props) => (props.isSelected ? "#fff" : "#0d0d0d")};
   display: flex;
   padding: 10px;
   justify-content: flex-start;
   align-items: center;
-  /* border: 1px solid d#e9e9e9; */
   cursor: pointer;
   margin-bottom: 16px;
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   :hover {
-    /* background-color: #42a132; */
-    /* transform: translateX(-20px); */
     div {
       background-color: #fff;
-      /* background-color: #000; */
     }
   }
 `;
+
+const Input = styled.input`
+  /* max-width: 90%; */
+  width: 92%;
+  font-size: 16px;
+  color: #fff;
+  font-family: "Gilroy";
+  font-weight: 500;
+  background-color: #1e2127;
+  border-radius: 10px;
+  border: solid;
+  border-width: ${(props) => (props.isSelected ? "2px" : "2px")};
+  border-color: ${(props) => (props.isSelected ? "#fff" : "#0d0d0d")};
+  display: flex;
+  padding: 10px;
+  /* padding-left: 40px; */
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.visible ? "1" : "0")};
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+
+  /* :hover {
+    div {
+      background-color: #fff;
+    }
+  } */
+
+  ::placeholder {
+    color: #b1b1b1;
+  }
+
+  &:focus {
+    outline: none;
+  }
+  @media screen and (max-width: 320px) {
+    max-width: 60vw;
+  }
+`;
+
 const Circle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  /* background: #e0e1ff; */
-  /* background-color: ${(props) =>
-    props.isSelected ? "#666aff" : "#e0e1ff"}; */
-  background: ${(props) =>
-    props.isSelected
-      ? "#fff"
-      : //   "linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%)"
-        // "#EBECFF"};
-        "#e0e0e0"};
+  background: ${(props) => (props.isSelected ? "#fff" : "#e0e0e0")};
   margin-right: 16px;
 `;
 
@@ -379,7 +888,6 @@ const Button2 = styled.button`
   width: 200px;
   font-size: 16px;
   color: #e0e0e0;
-  /* background-color: #fff; */
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
   border-radius: 16px;
   outline: none;
@@ -467,15 +975,14 @@ const ButtonBack = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid #c3c5ff;
+  border: 1px solid #bdbdbd;
   display: flex;
-  background: #fff;
+  background: #1e2127;
   align-items: center;
   justify-content: center;
 
   :hover {
-    background: #f8f8f8;
-    border-color: #a6a9ff;
+    border-color: #4ea732;
   }
 
   img {
@@ -576,6 +1083,12 @@ const TitleContainer = styled.div`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transform: translateX(${(props) => (props.visible ? "0px" : "-8px")});
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+`;
+
+const QCBW = styled.div`
+  position: absolute;
+  right: 40px;
+  top: -20px;
 `;

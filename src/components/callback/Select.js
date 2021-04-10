@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
 import ArrowDown from "../../images/Iconly/Bulk/Arrow - Down Circle.svg";
 
 const DropDownContainer = styled("div")`
   width: 295px;
+  width: 290px;
   margin: 20px auto;
 `;
 
@@ -18,12 +19,17 @@ const DropDownHeader = styled("div")`
   ${(props) => (props.title ? "10px" : "0px")};
   color: ${(props) => (props.selectedOption ? "#4f4f4f" : "#b1b1b1")};
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 8px;
   height: 50px;
-  border: ${(props) => (props.isError ? "2px solid red" : "none")};
+  border: ${(props) => (props.isError ? "2px solid red" : "2px solid #1E2127")};
 
   :hover {
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 80vw;
+    margin: 0 auto 8px;
   }
 `;
 
@@ -39,8 +45,9 @@ const DropDownList = styled("ul")`
   background: #ffffff;
   /* border: 2px solid #e5e5e5; */
   border-radius: 16px;
+  border-radius: 8px;
   box-sizing: border-box;
-  width: 295px;
+  width: 290px;
 
   font-weight: 500;
   font-size: 15px;
@@ -48,9 +55,22 @@ const DropDownList = styled("ul")`
 
   &:first-child {
     padding-top: 16px;
+
+    @media screen and (max-width: 320px) {
+      padding-top: 8px;
+    }
   }
   &:last-child {
     padding-bottom: 2px;
+  }
+
+  @media screen and (max-width: 320px) {
+    width: 80vw;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+    height: 170px;
   }
 `;
 
@@ -72,7 +92,7 @@ const ListItem = styled("li")`
 
 const Img = styled.img`
   position: absolute;
-  top: 14px;
+  top: 12px;
   right: 16px;
   z-index: 1;
 `;
@@ -85,6 +105,7 @@ export default function App({
   toggling,
   isOpen,
   isError,
+  setIsOpen,
 }) {
   // const [selectedOption, setSelectedOption] = useState(null);
 
@@ -93,6 +114,27 @@ export default function App({
   //   setIsOpen(false);
   //   console.log(selectedOption);
   // };
+  const ref = useRef();
+  const selectRef = useRef();
+
+  function handleClickOutside(event) {
+    if (
+      ref.current &&
+      !ref.current.contains(event.target) &&
+      !selectRef.current.contains(event.target)
+    ) {
+      // console.log("hello");
+      // toggling();
+      setIsOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     // <Main>
@@ -101,12 +143,13 @@ export default function App({
         onClick={toggling}
         selectedOption={selectedOption}
         isError={isError}
+        ref={selectRef}
       >
         {selectedOption || "- Выберите филиал -"}
         <Img src={ArrowDown} />
       </DropDownHeader>
       {isOpen && (
-        <DropDownListContainer>
+        <DropDownListContainer ref={ref}>
           <DropDownList>
             {options.map((option) => (
               <ListItem onClick={handleSelect(option)} key={Math.random()}>

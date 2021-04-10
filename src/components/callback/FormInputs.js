@@ -44,6 +44,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     setEmptyName(true);
     setPost({ ...post, name: e.target.value });
     post.name.length > 2 && setErrorName(false);
+    console.log(post.name);
   };
 
   const handlePhone = (e) => {
@@ -85,20 +86,23 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     score && setPost({ ...post, score: `${score} из ${allQuestions.length}` });
     // if (errorName === false && errorPhone === false) {
     if (
-      post.name.length < 3 &&
-      post.phone.length < 18 &&
+      post.name.length < 3 ||
+      post.phone.length < 18 ||
       selectedOption === null
     ) {
       console.log("wrong credentials", post.phone);
+      // {
+      //   action && action();
+      // }
     } else {
-      console.log(score, post.score);
+      // console.log(score, post.score);
       console.log("success");
       setIsLoading(true);
       axios
         .post("/callback", post)
         .then((res) => {
-          console.log(res.data.message);
-          console.log(post);
+          // console.log(res.data.message);
+          // console.log(post);
           setIsLoading(false);
           setSuccess(true);
           {
@@ -125,6 +129,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
           errorName={errorName}
           isError={errorName}
           isEmpty={emptyName}
+          required
         ></Input>
       </InputContainer>
       <InputContainer isError={errorPhone}>
@@ -139,6 +144,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
           onChange={handlePhone}
           isError={errorPhone}
           isEmpty={emptyNumber}
+          required
         />
         {/* <Input
           type="tel"
@@ -153,6 +159,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
         toggling={toggling}
         isOpen={isOpen}
         isError={errorSelect}
+        setIsOpen={setIsOpen}
       />
 
       <SendButton
@@ -173,13 +180,14 @@ const FormWrapper = styled.form`
   display: grid;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px 0;
 `;
 
 const InputContainer = styled.div`
   position: relative;
   /* margin: 0 20px; */
   /* border: 2px solid yellow; */
+  margin: auto;
 
   input {
     /* border: ${(props) => (props.isError ? "2px solid red" : "none")}; */
@@ -191,7 +199,7 @@ const Input = styled.input`
   font-size: 16px;
   position: relative;
   margin-top: 20px;
-  width: 100%;
+  /* width: 100%; */
   /* padding: 12px 60px; */
   /* background: linear-gradient(
     180deg,
@@ -201,7 +209,7 @@ const Input = styled.input`
   background-color: #f8f8f8;
   /* border: 2px solid; */
   /* border: ${(props) => (props.errorName ? "2px solid red" : "none")}; */
-  border: ${(props) => (props.isError ? "2px solid red" : "none")};
+  border: ${(props) => (props.isError ? "2px solid red" : "2px solid #1E2127")};
   /* border: none; */
   /* border-color: red; */
   box-shadow: rgba(0, 0, 0, 0.15) 0px 20px 40px,
@@ -217,9 +225,9 @@ const Input = styled.input`
   color: ${(props) => (props.isEmpty ? "#4f4f4f" : "#b1b1b1")};
 
   border-radius: 16px;
+  border-radius: 8px;
   height: 50px;
-  width: 295px;
-  /* width: 100%; */
+  width: 290px;
   transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   ::placeholder {
@@ -236,6 +244,9 @@ const Input = styled.input`
       rgba(24, 32, 79, 0.25) 100% */
     /* ); */
   }
+  @media screen and (max-width: 320px) {
+    width: 80vw;
+  }
 `;
 
 const Img = styled.img`
@@ -243,4 +254,8 @@ const Img = styled.img`
   top: 32px;
   right: 16px;
   z-index: 1;
+
+  @media screen and (max-width: 320px) {
+    right: 18%;
+  }
 `;
