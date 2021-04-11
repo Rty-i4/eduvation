@@ -8,7 +8,7 @@ import rocket from "../../images/rocket.png";
 import gift from "../../images/gift.png";
 import StartQuizButton from "../buttons/StartQuizButton";
 
-function QuizWelcomPage({ setWelcome }) {
+function QuizWelcomPage({ setWelcome, levelQuiz }) {
   return (
     <Wrapper>
       <ImageWrapper>
@@ -17,27 +17,39 @@ function QuizWelcomPage({ setWelcome }) {
       </ImageWrapper>
       <Section>
         <TextWrapper>
-          <H3 align={true}>
-            Хочешь учиться в лучших <br />
-            университетах мира?
-            {/* Хотите проверить свой <br />
-            уровень английского? */}
-          </H3>
-          <Desc align={true}>
-            Пройди опрос и получи
-            <br />
-            консультацию от специалистов
-            {/* Пройди тест и подбери подходящий
-            <br />
-            формат обучения */}
-          </Desc>
+          {levelQuiz ? (
+            <>
+              <H3 align={true}>
+                Хотите проверить свой <br />
+                уровень английского?
+              </H3>
+              <Desc align={true}>
+                Пройди тест и подбери подходящий
+                <br />
+                формат обучения
+              </Desc>
+            </>
+          ) : (
+            <>
+              <H3 align={true}>
+                Хочешь учиться в лучших <br />
+                университетах мира?
+              </H3>
+              <Desc align={true}>
+                Пройди опрос и получи
+                <br />
+                консультацию от специалистов
+              </Desc>
+            </>
+          )}
           <StartQuizButton setWelcome={setWelcome} />
         </TextWrapper>
 
         <Bonus>
           <Img src={gift} />
           <SmallText>
-            Бонус после прохождения теста <br /> Скидка 10%
+            Бонус после <br />
+            прохождения теста
           </SmallText>
         </Bonus>
       </Section>

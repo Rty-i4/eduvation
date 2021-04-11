@@ -12,6 +12,8 @@ import QuizCloseButton from "./QuizCloseButton";
 
 import pattern from "../../images/work-pattern.png";
 import rocket from "../../images/rocket.png";
+import download from "../../images/Iconly/Download.svg";
+import { Loader } from "../callback/Loader";
 
 export default function Quiz2({
   isTest,
@@ -140,7 +142,7 @@ export default function Quiz2({
         // setPost({ ...post, time: value });
         break;
       case 7:
-        setPhone(value);
+        setPhone(e.target.value);
         setPost({
           ...post,
           phone: e.target.value,
@@ -167,8 +169,10 @@ export default function Quiz2({
 
   const handlePhone = (e) => {
     setEmptyNumber(true);
+    setPhone(e.target.value);
     setPost({ ...post, phone: e.target.value });
-    post.phone.length === 18 && setErrorPhone(false);
+    console.log(post.phone.length);
+    // post.phone.length === 18 && setErrorPhone(false);
   };
 
   // TODO : Add callback !!!
@@ -198,55 +202,58 @@ export default function Quiz2({
     // setErrors({ ...errors, phoneError: "Введите правильный номер" });
     score && setPost({ ...post, score: `${score} из ${allQuestions.length}` });
     // if (errorName === false && errorPhone === false) {
-    if (
-      // post.name.length < 3 ||
-      post.phone.length < 18
-      // ||
-      // selectedOption === null
-    ) {
-      console.log("wrong credentials", post.phone);
-      // {
-      //   action && action();
-      // }
-    } else {
-      // console.log(score, post.score);
-      console.log("success");
-      setIsLoading(true);
-      axios
-        .post("/callback", post)
-        .then((res) => {
-          // console.log(res.data.message);
-          // console.log(post);
-          setIsLoading(false);
-          setSuccess(true);
-          {
-            action && action();
-          }
-        })
-        .catch((err) => {
-          setResText("Попробуйте заново");
-          setSuccess(true);
-          setIsLoading(false);
-          console.log(err);
-        });
-    }
+    // if (
+    //   // post.name.length < 3 ||
+    //   post.phone.length < 18
+    //   // ||
+    //   // selectedOption === null
+    // ) {
+    //   console.log("wrong credentials", post.phone);
+    //   // {
+    //   //   action && action();
+    //   // }
+    // } else {
+    //   // console.log(score, post.score);
+    //   console.log("success");
+    //   setIsLoading(true);
+    //   axios
+    //     .post("/callback", post)
+    //     .then((res) => {
+    //       // console.log(res.data.message);
+    //       // console.log(post);
+    //       setIsLoading(false);
+    //       setSuccess(true);
+    //       {
+    //         action && action();
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       setResText("Попробуйте заново");
+    //       setSuccess(true);
+    //       setIsLoading(false);
+    //       console.log(err);
+    //     });
+    // }
 
-    console.log("success");
+    // console.log("success");
     setIsLoading(true);
     axios
       .post("/callback", post)
       .then((res) => {
         // console.log(res.data.message);
         // console.log(post);
-        setIsLoading(false);
+        console.log("success");
         setSuccess(true);
+        setShowScore(true);
+        setIsLoading(false);
         {
           action && action();
         }
       })
       .catch((err) => {
         setResText("Попробуйте заново");
-        setSuccess(true);
+        setSuccess(false);
+        setShowScore(true);
         setIsLoading(false);
         console.log(err);
       });
@@ -269,7 +276,7 @@ export default function Quiz2({
   };
 
   const incrementQuestion = (isCorrect, index) => {
-    // makeSelected(index);
+    makeSelected(index);
 
     switch (currentQuestion) {
       case 0:
@@ -421,8 +428,9 @@ export default function Quiz2({
       //   }, 400);
       // action = { action };
       console.log(post);
+
       addCallback();
-      setShowScore(true);
+      // setShowScore(true);
     }
 
     setTimeout(function () {
@@ -505,49 +513,75 @@ export default function Quiz2({
                     </P>
                   </TitleWrapper>
                   <Hr />
-                  {showScore ? (
-                    <>
-                      <Score showScore={showingScore}>
-                        <CheckWrapper>
-                          <CheckMark />
-                        </CheckWrapper>
-                        <h4
-                          style={{
-                            color: "#fff",
-                            fontWeight: 700,
-                            fontSize: "22px",
-                            margin: "32px",
-                            textAlign: "center",
-                            lineHeight: "140%",
-                          }}
-                        >
-                          Ваша заявка принята!
-                          <br />
-                          <p
-                            style={{
-                              color: "#e0e0e0",
-                              fontSize: "16px",
-                              lineHeight: "130%",
-                              paddingTop: "16px",
-                              fontWeight: 500,
+                  {loading ? (
+                    // LOADER
+
+                    <Loader />
+                  ) : showScore ? (
+                    <Score showScore={showingScore}>
+                      {success ? (
+                        <>
+                          <CheckWrapper>
+                            <CheckMark />
+                          </CheckWrapper>
+                          <ScoreText>
+                            Ваша заявка принята!
+                            <br />
+                            <ScoreP>
+                              Мы свяжемся с вами в ближайшее время
+                            </ScoreP>
+                          </ScoreText>
+                          {/* <Button2
+                            visible={"true"}
+                            onClick={() => {
+                              handleTryAgain();
+                              handleQuiz();
                             }}
                           >
-                            Мы свяжемся с вами в ближайшее время
-                          </p>
-                        </h4>
-                        <Button2
-                          visible={"true"}
-                          // onClick={() => handleTryAgain()}
-                          onClick={() => {
-                            handleTryAgain();
-                            handleQuiz();
-                          }}
-                        >
-                          Ок
-                        </Button2>
-                      </Score>
-                    </>
+                            Ок
+                          </Button2> */}
+                          {/* <CheckWrapper> */}
+                          <a
+                            href="https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+                            target="_blank"
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                flexDirection: "column",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <DownloadText>Ваш бонус</DownloadText>
+                              <img
+                                style={{ width: 66, height: 66 }}
+                                src={download}
+                              />
+                            </div>
+                          </a>
+                          {/* </CheckWrapper> */}
+                        </>
+                      ) : (
+                        <>
+                          <ScoreText>
+                            Что-то пошло не так!
+                            <ScoreP>Попробуйте еще раз</ScoreP>
+                          </ScoreText>
+                          <Button2
+                            visible={"true"}
+                            onClick={() => {
+                              handleTryAgain();
+                              // handleQuiz();
+                            }}
+                          >
+                            Ок
+                          </Button2>
+                        </>
+                      )}
+                    </Score>
                   ) : (
+                    // QUESTIONS
                     <>
                       <QuestionCard isVisible={questionVisible}>
                         <TitleContainer visible={visible}>
@@ -570,6 +604,7 @@ export default function Quiz2({
                                 visible={visible}
                                 isError={errorPhone}
                                 isEmpty={emptyNumber}
+                                isSelected={answerOption.isSelected}
                                 key={index}
                                 required
                               />
@@ -629,7 +664,15 @@ export default function Quiz2({
                         </ButtonBack>
                         <ButtonNext
                           onClick={() => handleNext()}
-                          disabled={disabled}
+                          disabled={
+                            disabled ||
+                            (currentQuestion === 1 && name.length < 3) ||
+                            (currentQuestion === 7 && phone.length < 18)
+                          }
+                          notActive={
+                            (currentQuestion === 1 && name.length < 3) ||
+                            (currentQuestion === 7 && post.phone.length < 18)
+                          }
                         >
                           Next <img src={arrowRight} alt="arrow-right" />
                         </ButtonNext>
@@ -692,14 +735,6 @@ const Container = styled.div`
   border-radius: 20px;
   display: grid;
   visibility: ${(props) => (props.isTest ? "visible" : "hidden")};
-  /* grid-template-columns: auto 490px; */
-  /* filter: drop-shadow(0px 20px 40px rgba(108, 105, 117, 0.5)); */
-  /* box-shadow: 0px 20px 40px rgba(108, 105, 117, 0.15); */
-  /* overflow-x: hidden; */
-  /* overflow: ${({ quizForm }) => (quizForm ? "visible" : "hidden")}; */
-  /* @media screen and (max-width: 500px) {
-    width: 300px;
-  } */
 `;
 
 const ContentWrapper = styled.div`
@@ -939,6 +974,10 @@ const Score = styled.div`
   /* transition: 0.8s all ease-in; */
   opacity: 0;
   animation: TransitioningBackground 0.4s ease-out 0.1s 1 normal forwards;
+
+  @media screen and (max-width: 320px) {
+    margin-top: 20px;
+  }
 `;
 
 const ButtonNext = styled.button`
@@ -954,6 +993,7 @@ const ButtonNext = styled.button`
   font-size: 16px;
   /* line-height: 20px; */
   font-weight: 600;
+  opacity: ${(props) => (props.notActive ? "0.4" : "1")};
 
   display: grid;
   grid-template-columns: auto auto;
@@ -1091,4 +1131,34 @@ const QCBW = styled.div`
   position: absolute;
   right: 40px;
   top: -20px;
+`;
+
+const ScoreText = styled.h4`
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 32px;
+  text-align: center;
+  line-height: 140%;
+`;
+
+const ScoreP = styled.p`
+  color: #e0e0e0;
+  font-size: 16px;
+  line-height: 130%;
+  padding-top: 16px;
+  font-weight: 500;
+`;
+
+const DownloadText = styled.h4`
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 32px 0 0;
+  text-align: center;
+  line-height: 140%;
+
+  @media screen and (max-width: 320px) {
+    margin: 16px 0 0;
+  }
 `;

@@ -156,7 +156,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     if (nextQuestion < questions.length) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
       calculateScore();
       // handleLevel(score);
@@ -167,7 +167,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
 
   const handlePrevious = () => {
@@ -179,7 +179,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     if (nextQuestion < questions.length && nextQuestion > -1) {
       setTimeout(function () {
         setCurrentQuestion(nextQuestion);
-      }, 400);
+      }, 300);
     } else {
       setCurrentQuestion(0);
       setVisible(true);
@@ -187,13 +187,13 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
 
     setTimeout(function () {
       setDisabled(false);
-    }, 1000);
+    }, 600);
   };
   useEffect(() => {
     const timer = setTimeout(() => {
       //   console.log("This will run after 1 second!");
       setVisible(!visible);
-    }, 400);
+    }, 300);
     return () => clearTimeout(timer);
   }, [currentQuestion]);
 
@@ -234,7 +234,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
           </QCBW>
           <ContentWrapper quizForm={quizForm} isTest={isTest}>
             {welcome ? (
-              <QuizWelcomPage setWelcome={closeWelcome} />
+              <QuizWelcomPage setWelcome={closeWelcome} levelQuiz={true} />
             ) : quizForm ? (
               <QuizForm
                 action={action}
@@ -482,11 +482,17 @@ const QuestionTitle = styled.h3`
   font-weight: 500;
   margin: 40px 0 40px;
   color: #fff;
+  line-height: 22px;
 
   /* visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
   transform: translateX(${(props) => (props.visible ? "0px" : "-30px")}); */
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  /* transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s; */
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+
+  @media screen and (max-width: 320px) {
+    margin: 0 0 20px;
+  }
 `;
 
 const Button = styled.button`
@@ -509,8 +515,10 @@ const Button = styled.button`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  /* transform: translateX(${(props) => (props.visible ? "0px" : "-30px")}); */
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  /* transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s; */
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   :hover {
     div {
@@ -546,8 +554,10 @@ const Button2 = styled.button`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  /* transform: translateX(${(props) => (props.visible ? "0px" : "-30px")}); */
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  /* transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s; */
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 
   :hover {
     background-color: #e0e1ff;
@@ -725,8 +735,9 @@ const TitleContainer = styled.div`
 
   visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   opacity: ${(props) => (props.visible ? "1" : "0")};
-  transform: translateX(${(props) => (props.visible ? "0px" : "-30px")});
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transform: translateX(${(props) => (props.visible ? "0px" : "-10px")});
+  /* transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s; */
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 `;
 
 const QCBW = styled.div`
