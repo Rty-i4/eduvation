@@ -12,6 +12,7 @@ import QuizCloseButton from "./QuizCloseButton";
 
 import pattern from "../../images/work-pattern.png";
 import rocket from "../../images/rocket.png";
+import download from "../../images/Iconly/Download.svg";
 
 export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   const [welcome, setWelcome] = useState(true);
@@ -272,11 +273,38 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
                           <br />
                           Рекомендуемый уровень <br /> {englishLevel}
                         </h4>
+                        <a
+                          href={
+                            "https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+                            // downloadLink
+                          }
+                          target="_blank"
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              flexDirection: "column",
+                              cursor: "pointer",
+                            }}
+                          >
+                            <DownloadText>Ваш бонус</DownloadText>
+
+                            <img
+                              style={{
+                                width: 40,
+                                height: 40,
+                                marginBottom: "40px",
+                              }}
+                              src={download}
+                            />
+                          </div>
+                        </a>
                         <Button2
                           visible={"true"}
                           onClick={() => handleTryAgain()}
                         >
-                          Try again
+                          Начать заново
                         </Button2>
                       </Score>
                     </>
@@ -591,6 +619,10 @@ const Score = styled.div`
   /* transition: 0.8s all ease-in; */
   opacity: 0;
   animation: TransitioningBackground 0.4s ease-out 0.1s 1 normal forwards;
+
+  @media screen and (max-height: 660px) {
+    margin-top: 30px;
+  }
 `;
 
 const ButtonNext = styled.button`
@@ -744,4 +776,17 @@ const QCBW = styled.div`
   position: absolute;
   right: 40px;
   top: -20px;
+`;
+
+const DownloadText = styled.h4`
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  margin: 32px 0 0px;
+  text-align: center;
+  line-height: 140%;
+
+  @media screen and (max-width: 320px) {
+    margin: 16px 0 0;
+  }
 `;

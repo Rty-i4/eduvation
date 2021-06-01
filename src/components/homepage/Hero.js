@@ -11,7 +11,9 @@ import { Link } from "react-scroll";
 function Hero({ action, mainAction }) {
   return (
     <Wrapper>
-      <Img src={goknam} />
+      <ImgContainer>
+        <Img src={goknam} />
+      </ImgContainer>
       <Section>
         <HeroTitle>
           Курсы по поготовке к <br />
@@ -19,16 +21,16 @@ function Hero({ action, mainAction }) {
           IELTS, SAT, NUFYPET
         </HeroTitle>
         <Buttons>
-          <Link
+          {/* <Link
             activeClass="active"
             to="heroCall"
             spy={true}
             smooth={true}
             offset={-50}
             duration={700}
-          >
-            <MainButton mainAction={mainAction} />
-          </Link>
+          > */}
+          <MainButton mainAction={mainAction} />
+          {/* </Link> */}
           <SecondaryButton action={action} />
         </Buttons>
       </Section>
@@ -84,5 +86,16 @@ const Section = styled.div`
   @media screen and (max-width: 768px) {
     grid-gap: 0;
     margin-left: 0px;
+  }
+`;
+// div for loading fast
+const ImgContainer = styled.div`
+  height: 598px;
+  @media screen and (max-width: 768px) {
+    height: 400px;
+  }
+
+  @media screen and (max-width: 450px) {
+    height: 368px;
   }
 `;

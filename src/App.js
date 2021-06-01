@@ -21,6 +21,10 @@ import SatPage from "./pages/SatPage";
 import NufypetPage from "./pages/NufypetPage";
 import ScrollToTop from "./layout/ScrollToTop";
 import EnglishPage from "./pages/EnglishPage";
+import axios from "axios";
+
+axios.defaults.baseURL =
+  "https://europe-west3-eduvation-b02a9.cloudfunctions.net/api";
 
 function App() {
   // render() {
