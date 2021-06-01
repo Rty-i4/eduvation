@@ -42,11 +42,19 @@ function IeltsPage() {
         image={Cambridge}
         text="Получить 500+ слов для IELTS"
         action={handleQuiz}
+        secondAction={handleQuiz}
       />
       <Quiz2
         isTest={isTest}
         handleQuiz={closeQuiz}
         questions={callbackQuestions}
+        downloadLink="https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+        // "https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+        // link for sample tests
+        // https://drive.google.com/drive/folders/1t4TB8Q75JS6219iql6t2Iimq6yikJQDq?usp=sharing
+
+        // SAT
+        // https://drive.google.com/file/d/1GJDjhx9NY4pX5CedW9B5JwbiZeipbSh4/view?usp=sharing
       />
       <Content>
         <CourseJumbo

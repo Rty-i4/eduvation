@@ -8,7 +8,7 @@ import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
 import { ButtonsWrapper } from "../../layout/ButtonsWrapper";
 
-function PageHero({ title, description, image, text, action }) {
+function PageHero({ title, description, image, text, action, secondAction }) {
   return (
     <Wrapper>
       <HeroSection>
@@ -20,7 +20,7 @@ function PageHero({ title, description, image, text, action }) {
             {/* <ButtonsWrapper> */}
             <Buttons>
               <MainButton mainAction={action} />
-              <SecondaryButton text={text} />
+              <SecondaryButton text={text} action={secondAction} />
             </Buttons>
             {/* </ButtonsWrapper> */}
           </HeroText>

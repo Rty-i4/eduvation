@@ -21,6 +21,7 @@ export default function Quiz2({
   setIsTest,
   subject,
   questions,
+  downloadLink,
 }) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
@@ -57,6 +58,12 @@ export default function Quiz2({
   const [phone, setPhone] = useState("");
 
   // end
+  // "https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+  // link for sample tests
+  // https://drive.google.com/drive/folders/1t4TB8Q75JS6219iql6t2Iimq6yikJQDq?usp=sharing
+
+  // SAT
+  // https://drive.google.com/file/d/1GJDjhx9NY4pX5CedW9B5JwbiZeipbSh4/view?usp=sharing
 
   const ref = useRef();
   const quizRef = useRef();
@@ -541,10 +548,7 @@ export default function Quiz2({
                             Ок
                           </Button2> */}
                           {/* <CheckWrapper> */}
-                          <a
-                            href="https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
-                            target="_blank"
-                          >
+                          <a href={downloadLink} target="_blank">
                             <div
                               style={{
                                 display: "flex",

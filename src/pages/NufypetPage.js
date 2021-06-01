@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import CourseJumbo from "../components/jumbotron/CourseJumbo";
 import PageHero from "../components/PageHero/PageHero";
@@ -19,7 +19,26 @@ import { H3 } from "../layout/TextStyles";
 import SecondaryButton from "../components/buttons/SecondaryButton";
 import { ButtonsWrapper } from "../layout/ButtonsWrapper";
 
+import Quiz2 from "../components/Quiz/Quiz2";
+import { callbackQuestions } from "../Data/CallbackQuestions";
+
+// link for sample tests
+// https://drive.google.com/drive/folders/1t4TB8Q75JS6219iql6t2Iimq6yikJQDq?usp=sharing
+
+// SAT
+// https://drive.google.com/file/d/1GJDjhx9NY4pX5CedW9B5JwbiZeipbSh4/view?usp=sharing
 function NufypetPage() {
+  const [isTest, setIsTest] = useState(false);
+
+  const handleQuiz = () => {
+    setIsTest(!isTest);
+  };
+
+  // const
+
+  const closeQuiz = () => {
+    setIsTest(false);
+  };
   return (
     <Wrapper>
       <PageHero
@@ -32,6 +51,20 @@ function NufypetPage() {
         }
         image={NU}
         text="Получить план подготовки"
+        action={handleQuiz}
+        secondAction={handleQuiz}
+      />
+      <Quiz2
+        isTest={isTest}
+        handleQuiz={closeQuiz}
+        questions={callbackQuestions}
+        downloadLink="https://drive.google.com/drive/folders/1t4TB8Q75JS6219iql6t2Iimq6yikJQDq?usp=sharing"
+        // "https://drive.google.com/file/d/1N2AoAlNsdRc-oqs2AmM5_pRRH0J7Jl-1/view"
+        // link for sample tests
+        // https://drive.google.com/drive/folders/1t4TB8Q75JS6219iql6t2Iimq6yikJQDq?usp=sharing
+
+        // SAT
+        // https://drive.google.com/file/d/1GJDjhx9NY4pX5CedW9B5JwbiZeipbSh4/view?usp=sharing
       />
       <CourseJumbo
         reverse={true}
@@ -86,8 +119,12 @@ function NufypetPage() {
         image={Learning}
       />
       <ButtonsWrapper>
-        <MainButton />
-        <SecondaryButton text="Получить план подготовки" />
+        <MainButton mainAction={handleQuiz} />
+        <SecondaryButton
+          text="Получить пробный тест"
+          action={handleQuiz}
+          secondAction={handleQuiz}
+        />
       </ButtonsWrapper>
       <Testimonials />
       <CourseJumbo
@@ -154,8 +191,8 @@ function NufypetPage() {
         image={Crit}
       />
       <ButtonsWrapper>
-        <MainButton />
-        <SecondaryButton text="Получить план подготовки" />
+        <MainButton mainAction={handleQuiz} />
+        <SecondaryButton text="Получить пробный тест" action={handleQuiz} />
       </ButtonsWrapper>
       <TextWrapper>
         <H3>Наши преподаватели</H3>
