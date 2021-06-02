@@ -59,6 +59,13 @@ const Home = () => {
         // SAT
         // https://drive.google.com/file/d/1GJDjhx9NY4pX5CedW9B5JwbiZeipbSh4/view?usp=sharing
       />
+      <Notice>
+        <NoticeTitle>Внимание</NoticeTitle>
+        <p>Онлайн платформа теперь на</p>
+        <NoticeLink href="https://eduvation.kz" target="_blank">
+          eduvation.online
+        </NoticeLink>
+      </Notice>
       <Achievements />
 
       <JumboCall first={true} />
@@ -68,6 +75,7 @@ const Home = () => {
       </Space>
       <Courses />
       <Space />
+
       <Results />
       <Space />
       <ButtonsWrapper>
@@ -123,4 +131,32 @@ const DeskHide = styled.div`
   @media screen and (min-width: 450px) {
     display: none;
   }
+`;
+
+const Notice = styled.div`
+  color: white;
+  margin: 60px 20px 0;
+  padding: 16px;
+  background: #1e2127;
+  border-radius: 8px;
+  display: grid;
+  grid-gap: 10px;
+`;
+
+const NoticeTitle = styled.p`
+  margin-bottom: 10px;
+  font-size: 14px;
+  background: linear-gradient(
+    90deg,
+    #7ccb2b -0.35%,
+    #7ccb2b 40.14%,
+    #65c432 157.33%,
+    #31ae42 234.03%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
+const NoticeLink = styled.a`
+  color: #4689ff;
 `;

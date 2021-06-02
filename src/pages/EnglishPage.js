@@ -37,7 +37,9 @@ function EnglishPage() {
       <PageHero
         title="Английский язык"
         description={
-          <div>Начните говорить на иностранном языке уже через 5 недель!</div>
+          <div>
+            Начните говорить на иностранном языке <br /> уже через 5 недель!
+          </div>
         }
         image={london}
         secondAction={handleQuiz}

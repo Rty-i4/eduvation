@@ -17,7 +17,7 @@ import { ButtonsWrapper } from "../layout/ButtonsWrapper";
 import Quiz2 from "../components/Quiz/Quiz2";
 import { callbackQuestions } from "../Data/CallbackQuestions";
 
-function IeltsPage() {
+const IeltsPage = () => {
   const [isTest, setIsTest] = useState(false);
 
   const handleQuiz = () => {
@@ -157,7 +157,7 @@ function IeltsPage() {
       </Content>
     </Wrapper>
   );
-}
+};
 
 export default IeltsPage;
 

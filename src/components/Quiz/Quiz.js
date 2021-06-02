@@ -17,7 +17,7 @@ import download from "../../images/Iconly/Download.svg";
 export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(48);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(false);
@@ -198,11 +198,11 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
     return () => clearTimeout(timer);
   }, [currentQuestion]);
 
-  useEffect(() => {
-    setTimeout(function () {
-      setShowingScore(!showingScore);
-    }, 800);
-  }, [showScore]);
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     setShowingScore(!showingScore);
+  //   }, 800);
+  // }, [showScore]);
 
   // Click outside refs
 
@@ -256,7 +256,9 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
                   <Hr />
                   {showScore ? (
                     <>
-                      <Score showScore={showingScore}>
+                      <Score
+                      //  showScore={showingScore}
+                      >
                         <CheckWrapper>
                           <CheckMark />
                         </CheckWrapper>

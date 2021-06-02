@@ -471,11 +471,11 @@ export default function Quiz2({
     return () => clearTimeout(timer);
   }, [currentQuestion]);
 
-  useEffect(() => {
-    setTimeout(function () {
-      setShowingScore(!showingScore);
-    }, 800);
-  }, [showScore]);
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     setShowingScore(!showingScore);
+  //   }, 800);
+  // }, [showScore]);
 
   // Click outside refs
 
@@ -525,7 +525,9 @@ export default function Quiz2({
 
                     <Loader />
                   ) : showScore ? (
-                    <Score showScore={showingScore}>
+                    <Score
+                    // showScore={showingScore}
+                    >
                       {success ? (
                         <>
                           <CheckWrapper>
