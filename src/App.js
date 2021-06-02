@@ -35,7 +35,7 @@ function App() {
           <ScrollToTop />
           <Header />
           <Switch>
-            <Route exact path="/">
+            {/* <Route exact path="/">
               <Home />
             </Route>
             <Route exact path="/callback">
@@ -55,14 +55,14 @@ function App() {
             </Route>
             <Route exact>
               <NotFoundPage />
-            </Route>
-            {/* <Route exact path="/" component={Home} />
+            </Route> */}
+            <Route exact path="/" component={Home} />
             <Route exact path="/callback" component={Callback} />
             <Route exact path="/ielts" component={IeltsPage} />
             <Route exact path="/sat" component={SatPage} />
             <Route exact path="/nufypet" component={NufypetPage} />
             <Route exact path="/english" component={EnglishPage} />
-            <Route exact component={NotFoundPage} /> */}
+            <Route component={NotFoundPage} />
           </Switch>
         </Router>
 

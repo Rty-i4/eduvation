@@ -30,7 +30,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     subject: `${subject || "-"}`,
     city: ``,
     phone: "",
-    mailTo: "renatilyasov95@gmail.com",
+    mailTo: "astanamerit@gmail.com",
     text: "-",
     // score: `${score || "-"}`,
     score: `${score ? `${score} из ${allQuestions.length}` : "-"}`,
@@ -62,20 +62,23 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
 
   const addCallback = (e) => {
     e.preventDefault();
-    // switch (selectedOption) {
-    //   case "Nur-Sultan":
-    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
-    //     break;
-    //   case "Nur-Sultan":
-    //     setPost({...newCallback, mailTo: "amityacademy@info.org"});
-    //     break;
-    //   case "Nur-Sultan":
-    //     setPost({...newCallback, mailTo: "astanamerit@gmail.com"});
-    //     break;
-    //   case "Nur-Sultan":
-    //     setPost({...newCallback, mailTo: "oxfordvision@info.org"});
-    //     break;
-    // }
+    switch (selectedOption) {
+      case "Aktobe":
+        setPost({ ...newCallback, mailTo: "oxfordvision16@gmail.com" });
+        break;
+      case "Atyrau":
+        setPost({ ...newCallback, mailTo: "amityacademy2016@gmail.com" });
+        break;
+      case "Nur-Sultan":
+        setPost({ ...newCallback, mailTo: "astanamerit@gmail.com" });
+        break;
+      case "Almaty":
+        setPost({ ...newCallback, mailTo: "rturniyazov@mail.ru" });
+        break;
+      default: {
+        setPost({ ...newCallback, mailTo: "astanamerit@gmail.com" });
+      }
+    }
 
     post.name.length < 3 ? setErrorName(true) : setErrorName(false);
     // setErrors({ ...errors, nameError: "Введите правильное имя" });

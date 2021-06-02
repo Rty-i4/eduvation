@@ -141,6 +141,10 @@ const Notice = styled.div`
   border-radius: 8px;
   display: grid;
   grid-gap: 10px;
+
+  @media screen and (min-width: 450px) {
+    display: none;
+  }
 `;
 
 const NoticeTitle = styled.p`

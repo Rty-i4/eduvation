@@ -22,7 +22,8 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   grid-gap: 150px;
-  margin: 120px 0;
+  /* margin: 120px 0; */
+  margin: 80px 0;
   @media screen and (max-width: 768px) {
     grid-gap: 0px;
   }
