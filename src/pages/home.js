@@ -62,7 +62,7 @@ const Home = () => {
       <Notice>
         <NoticeTitle>Внимание</NoticeTitle>
         <p>Онлайн платформа теперь на</p>
-        <NoticeLink href="https://eduvation.kz" target="_blank">
+        <NoticeLink href="https://eduvation.online" target="_blank">
           eduvation.online
         </NoticeLink>
       </Notice>
