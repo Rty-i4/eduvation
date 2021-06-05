@@ -10,18 +10,16 @@ import { Link } from "react-scroll";
 
 function Hero({ action, mainAction }) {
   return (
-    <Wrapper>
-      <ImgContainer>
-        <Img src={goknam} />
-      </ImgContainer>
-      <Section>
-        <HeroTitle>
-          Курсы по поготовке к <br />
-          международным экзаменам <br />
-          IELTS, SAT, NUFYPET
-        </HeroTitle>
-        <Buttons>
-          {/* <Link
+    <BG>
+      <Wrapper>
+        <Section>
+          <HeroTitle>
+            Курсы по поготовке к <br />
+            международным экзаменам <br />
+            IELTS, SAT, NUFYPET
+          </HeroTitle>
+          <Buttons>
+            {/* <Link
             activeClass="active"
             to="heroCall"
             spy={true}
@@ -29,16 +27,24 @@ function Hero({ action, mainAction }) {
             offset={-50}
             duration={700}
           > */}
-          <MainButton mainAction={mainAction} />
-          {/* </Link> */}
-          <SecondaryButton action={action} />
-        </Buttons>
-      </Section>
-    </Wrapper>
+            <MainButton mainAction={mainAction} />
+            {/* </Link> */}
+            <SecondaryButton action={action} />
+          </Buttons>
+        </Section>
+        <ImgContainer>
+          <Img src={goknam} />
+        </ImgContainer>
+      </Wrapper>
+    </BG>
   );
 }
 
 export default Hero;
+
+const BG = styled.div`
+  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%); ;
+`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -51,6 +57,8 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 450px) {
     margin: 0 20px;
+    display: flex;
+    flex-direction: column;
     grid-template-areas:
       "image"
       "text";
