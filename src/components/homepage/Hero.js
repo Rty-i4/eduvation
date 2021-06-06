@@ -32,9 +32,9 @@ function Hero({ action, mainAction }) {
             offset={-50}
             duration={700}
           > */}
-            <MainButton mainAction={mainAction} />
+            <MainButton mainAction={mainAction} isBlack={true} />
             {/* </Link> */}
-            <SecondaryButton action={action} />
+            <SecondaryButton action={action} isWhite={true} />
           </Buttons>
         </Section>
         <ImgContainer>
@@ -127,7 +127,7 @@ const ImgContainer = styled.div`
 
   @media screen and (max-width: 450px) {
     /* height: 368px; */
-    height: 250px;
+    height: 260px;
   }
 `;
 

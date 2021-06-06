@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-function SecondaryButton({ text, action }) {
+function SecondaryButton({ text, action, isWhite }) {
   return (
-    <Button onClick={action}>
+    <Button onClick={action} isWhite={isWhite}>
       {text || "Узнать свой уровень английского"}
     </Button>
   );
@@ -24,13 +24,14 @@ const Button = styled.button`
   background: transparent;
   /* border-radius: 30px; */
   border-radius: 8px;
-  border: 2px solid green;
-  border: 2px solid white;
+  /* border: 2px solid green; */
+  border: ${(props) => (props.isWhite ? "2px solid #fff" : "2px solid green")};
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
   font-family: "Gilroy";
   color: rgba(255, 255, 255, 0.9);
+  /* color: #0d0d0d; */
 
   :hover {
     cursor: pointer;

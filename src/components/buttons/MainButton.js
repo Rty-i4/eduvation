@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function MainButton({ mainAction }) {
+function MainButton({ mainAction, isBlack }) {
   return (
     // <Wrapper>
-    <Button onClick={mainAction}>
+    <Button onClick={mainAction} isBlack={isBlack}>
       <span>Записаться на пробный урок</span>
     </Button>
     // </Wrapper>
@@ -34,7 +34,6 @@ const Button = styled.button`
   width: 300px;
   height: 44px;
 
-  background: #34435e;
   border-radius: 8px;
 
   font-size: 16px;
@@ -42,7 +41,10 @@ const Button = styled.button`
   font-weight: 600;
   font-family: "Gilroy";
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
-  background: #0d0d0d;
+  background: ${(props) =>
+    props.isBlack
+      ? " #0d0d0d"
+      : "linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%)"};
   color: rgba(255, 255, 255, 0.9);
 
   :hover {

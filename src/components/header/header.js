@@ -238,6 +238,7 @@ const MenuDesktop = styled.div`
   gap: 30px;
   grid-template-columns: repeat(${(props) => props.count}, auto);
   margin-top: 34px;
+  margin-right: 20px;
   @media screen and (max-width: 840px) {
     gap: 8px;
     font-size: 15px;

@@ -17,7 +17,7 @@ import download from "../../images/Iconly/Download.svg";
 export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   const [welcome, setWelcome] = useState(true);
   const [allQuestions, setAllQuestions] = useState(questions);
-  const [currentQuestion, setCurrentQuestion] = useState(48);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [visible, setVisible] = useState(false);
