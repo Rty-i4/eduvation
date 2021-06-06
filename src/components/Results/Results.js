@@ -30,7 +30,8 @@ function Results() {
 export default Results;
 
 const Wrapper = styled.div`
-  margin-top: 120px;
+  /* margin-top: 120px; */
+  margin-top: 60px;
 
   @media screen and (min-width: 768px) {
     display: none;

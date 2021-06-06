@@ -66,6 +66,8 @@ const Home = () => {
           eduvation.online
         </NoticeLink>
       </Notice>
+      <Results />
+      <Space />
       <Achievements />
 
       <JumboCall first={true} />
@@ -76,8 +78,8 @@ const Home = () => {
       <Courses />
       <Space />
 
-      <Results />
-      <Space />
+      {/* <Results />
+      <Space /> */}
       <ButtonsWrapper>
         <MainButton mainAction={handleSurvey} />
         <SecondaryButton action={handleQuiz} />
