@@ -42,6 +42,7 @@ const Button = styled.button`
   font-weight: 600;
   font-family: "Gilroy";
   background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
+  background: #0d0d0d;
   color: rgba(255, 255, 255, 0.9);
 
   :hover {
@@ -93,7 +94,7 @@ const Button = styled.button`
   -moz-transform: translate3d(0, 0, 0);
 
   @media screen and (max-width: 450px) {
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
   }
 `;

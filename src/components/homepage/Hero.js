@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import goknam from "../../images/goknam.png";
+import vlad from "../../images/vladislav.png";
 import { HeroTitle } from "../../layout/TextStyles";
 import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
@@ -14,10 +15,14 @@ function Hero({ action, mainAction }) {
       <Wrapper>
         <Section>
           <HeroTitle>
-            Курсы по поготовке к <br />
-            международным экзаменам <br />
-            IELTS, SAT, NUFYPET
+            Курсы по подготовке к <br />
+            IELTS, SAT, NUFYPET, <br />
+            English
           </HeroTitle>
+          <HeroP>
+            Сеть образовательных центров в городах Алматы, Нур-Султан, Актобе,
+            Атырау
+          </HeroP>
           <Buttons>
             {/* <Link
             activeClass="active"
@@ -33,7 +38,7 @@ function Hero({ action, mainAction }) {
           </Buttons>
         </Section>
         <ImgContainer>
-          <Img src={goknam} />
+          <Img src={vlad} />
         </ImgContainer>
       </Wrapper>
     </BG>
@@ -43,7 +48,18 @@ function Hero({ action, mainAction }) {
 export default Hero;
 
 const BG = styled.div`
-  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%); ;
+  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
+  border-radius: 16px;
+  margin: 0 20px;
+  @media screen and (max-width: 768px) {
+    border-radius: 0px;
+  }
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
+  overflow: hidden;
+  /* overlay: none; */
+  /* height: 300px; */
 `;
 
 const Wrapper = styled.div`
@@ -52,18 +68,21 @@ const Wrapper = styled.div`
   grid-template-areas: "text image";
   align-items: center;
   margin: 30px 20px;
+  /* border-radius: 16px;
   @media screen and (max-width: 768px) {
-  }
+    border-radius: 0px;
+  } */
 
   @media screen and (max-width: 450px) {
-    margin: 0 20px;
-    display: flex;
-    flex-direction: column;
+    margin: 0 0px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    grid-template-columns: auto;
     grid-template-areas:
-      "image"
-      "text";
+      "text"
+      "image";
 
-    justify-content: center;
+    /* justify-self: center; */
   }
 `;
 
@@ -88,12 +107,14 @@ const Buttons = styled.div``;
 const Section = styled.div`
   grid-area: text;
   margin-left: 20px;
-  justify-self: start;
+  grid-area: text;
+  /* justify-self: start; */
   display: grid;
   grid-gap: 50px;
+  grid-gap: 0;
   @media screen and (max-width: 768px) {
     grid-gap: 0;
-    margin-left: 0px;
+    margin-left: 20px;
   }
 `;
 // div for loading fast
@@ -101,9 +122,20 @@ const ImgContainer = styled.div`
   height: 598px;
   @media screen and (max-width: 768px) {
     height: 400px;
+    /* overflow: hidden; */
   }
 
   @media screen and (max-width: 450px) {
-    height: 368px;
+    /* height: 368px; */
+    height: 250px;
   }
+`;
+
+const HeroP = styled.p`
+  color: #f2f2f2;
+  margin-top: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  width: 286px;
+  line-height: 130%;
 `;

@@ -47,8 +47,9 @@ export const HeroTitle = styled.h1`
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 24px;
-    text-align: center;
+    font-size: 28px;
+    /* text-align: center; */
+    margin-top: 50px;
   }
 `;
 

@@ -25,6 +25,7 @@ const Button = styled.button`
   /* border-radius: 30px; */
   border-radius: 8px;
   border: 2px solid green;
+  border: 2px solid white;
   font-size: 16px;
   line-height: 20px;
   font-weight: 600;
@@ -37,8 +38,8 @@ const Button = styled.button`
   }
 
   @media screen and (max-width: 450px) {
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
   }
   /* @keyframes TransitioningBackground {
     0% {
