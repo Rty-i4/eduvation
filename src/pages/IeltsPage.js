@@ -4,6 +4,7 @@ import { H1 } from "../layout/TextStyles";
 
 // Images
 import Cambridge from "../images/cambridge.jpg";
+// import Cambridge from "../images/IeltsBack.png";
 import ielts7 from "../images/ielts7.svg";
 import learning from "../images/Iconly/Bulk/learning.svg";
 import Crit from "../images/Iconly/Bulk/Crit.svg";

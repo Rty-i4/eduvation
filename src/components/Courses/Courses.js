@@ -4,7 +4,7 @@ import CourseCard from "./CourseCard";
 
 // images
 import NU from "../../images/nu.jpg";
-import Library from "../../images/library.jpg";
+import Library from "../../images/library2.jpg";
 import Cambridge from "../../images/cambridge.jpg";
 import London from "../../images/london.jpg";
 

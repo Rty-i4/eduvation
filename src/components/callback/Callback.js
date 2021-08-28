@@ -8,7 +8,7 @@ function Callback({ subject }) {
     <Wrapper>
       <FristWrap>
         <TextCall>
-          Запишись на <span> бесплантный</span>
+          Запишись на <span> бесплатный</span>
           <br />
         </TextCall>
         <TextCall2>
@@ -17,8 +17,8 @@ function Callback({ subject }) {
       </FristWrap>
       <SecondWrap>
         <FormInputs subject={subject} />
+        <SmallText>Сегодня записалось 12 человек</SmallText>
       </SecondWrap>
-      <SmallText>Сегодня записалось 12 человек</SmallText>
     </Wrapper>
   );
 }

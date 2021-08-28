@@ -6,12 +6,13 @@ import LocationIcon from "../../images/Iconly/Bulk/Location.svg";
 import InstaIcon from "../../images/Iconly/Bulk/Insta.svg";
 import MobileIcon from "../../images/Iconly/Bulk/Mobile.svg";
 
-function Address({ name, address, instagram, mobile }) {
+function Address({ name, address, instagram, mobile, link }) {
   return (
     <Wrapper>
       <City>{name}</City>
       <TextWrapper>
         <Icon src={LocationIcon} />
+
         <Text>{address}</Text>
       </TextWrapper>
       <TextWrapper>
@@ -20,7 +21,9 @@ function Address({ name, address, instagram, mobile }) {
       </TextWrapper>
       <TextWrapper>
         <Icon src={InstaIcon} />
-        <Text>{instagram}</Text>
+        <a href={link} target="_blank">
+          <Text>{instagram}</Text>
+        </a>
       </TextWrapper>
     </Wrapper>
   );

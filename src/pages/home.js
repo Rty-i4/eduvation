@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
-import { H3, H1 } from "../layout/TextStyles";
+import { H1 } from "../layout/TextStyles";
 import MainButton from "../components/buttons/MainButton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
 
@@ -13,7 +13,7 @@ import Testimonials from "../components/testimonials/Testimonials";
 import Quiz from "../components/Quiz/Quiz";
 import Hero from "../components/homepage/Hero";
 import Achievements from "../components/homepage/achievements/Achievements";
-import HomeJumbos from "../components/jumbotron/HomeJumbos";
+// import HomeJumbos from "../components/jumbotron/HomeJumbos";
 import MobileHomeJumbos from "../components/jumbotron/MobileHomeJumbos";
 import Courses from "../components/Courses/Courses";
 import JumboCall from "../components/jumbotron/JumboCall";
@@ -92,7 +92,7 @@ const Home = () => {
       {/* <BigSpace> */}
       <DeskHide>
         <ButtonsWrapper>
-          <MainButton />
+          <MainButton mainAction={handleSurvey} />
           <SecondaryButton action={handleQuiz} setIsTest={setIsTest} />
         </ButtonsWrapper>
       </DeskHide>

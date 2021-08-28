@@ -10,7 +10,14 @@ import SendButton from "./SendButton";
 import axios from "axios";
 // import { SuccessText } from "../../layout/TextStyles";
 
-function FormInputs({ text, action, score, subject, allQuestions }) {
+function FormInputs({
+  text,
+  action,
+  score,
+  subject,
+  allQuestions,
+  levelOfEnglish,
+}) {
   const [emptyNumber, setEmptyNumber] = useState(false);
   const [emptyName, setEmptyName] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -20,7 +27,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
   const [errorSelect, setErrorSelect] = useState(false);
   const [loading, setIsLoading] = useState(false);
   const [resText, setResText] = useState("Заявка принята!");
-
+  const [isSkip, setIsSkip] = useState(false);
   // Select toggle
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
@@ -35,6 +42,10 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     // score: `${score || "-"}`,
     score: `${score ? `${score} из ${allQuestions.length}` : "-"}`,
     result: score,
+    levelOfEnglish: `${levelOfEnglish}`,
+    time: "-",
+    certificate: "-",
+    year: "",
   };
 
   const [post, setPost] = useState(newCallback);
@@ -44,7 +55,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     setEmptyName(true);
     setPost({ ...post, name: e.target.value });
     post.name.length > 2 && setErrorName(false);
-    console.log(post.name);
+    // console.log(post.name);
   };
 
   const handlePhone = (e) => {
@@ -53,32 +64,56 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
     post.phone.length === 18 && setErrorPhone(false);
   };
   const handleSelect = (value) => () => {
-    // setEmptyNumber(true);
     setErrorSelect(false);
     setSelectedOption(value);
     setIsOpen(false);
-    setPost({ ...post, city: value });
+
+    switch (value) {
+      case "Актобе":
+        setPost({
+          ...post,
+          mailTo: "oxfordvision16@gmail.com",
+          city: value,
+          levelOfEnglish: `${levelOfEnglish}`,
+        });
+        break;
+      case "Атырау":
+        setPost({
+          ...post,
+          mailTo: "amityacademy2016@gmail.com",
+          city: value,
+          levelOfEnglish: `${levelOfEnglish}`,
+        });
+        break;
+      case "Нур-Султан":
+        setPost({
+          ...post,
+          mailTo: "astanamerit@gmail.com",
+          city: value,
+          levelOfEnglish: `${levelOfEnglish}`,
+        });
+        break;
+      case "Алматы":
+        setPost({
+          ...post,
+          mailTo: "rturniyazov@mail.ru",
+          city: value,
+          levelOfEnglish: `${levelOfEnglish}`,
+        });
+        break;
+      default: {
+        setPost({
+          ...post,
+          mailTo: "astanamerit@gmail.com",
+          city: value,
+          levelOfEnglish: `${levelOfEnglish}`,
+        });
+      }
+    }
   };
 
   const addCallback = (e) => {
     e.preventDefault();
-    switch (selectedOption) {
-      case "Aktobe":
-        setPost({ ...newCallback, mailTo: "oxfordvision16@gmail.com" });
-        break;
-      case "Atyrau":
-        setPost({ ...newCallback, mailTo: "amityacademy2016@gmail.com" });
-        break;
-      case "Nur-Sultan":
-        setPost({ ...newCallback, mailTo: "astanamerit@gmail.com" });
-        break;
-      case "Almaty":
-        setPost({ ...newCallback, mailTo: "rturniyazov@mail.ru" });
-        break;
-      default: {
-        setPost({ ...newCallback, mailTo: "astanamerit@gmail.com" });
-      }
-    }
 
     post.name.length < 3 ? setErrorName(true) : setErrorName(false);
     // setErrors({ ...errors, nameError: "Введите правильное имя" });
@@ -93,14 +128,16 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
       post.phone.length < 18 ||
       selectedOption === null
     ) {
-      console.log("wrong credentials", post.phone);
+      // console.log("wrong credentials", post.phone);
       // {
       //   action && action();
       // }
     } else {
       // console.log(score, post.score);
       console.log("success");
+      // console.log(post);
       setIsLoading(true);
+
       axios
         .post("/callback", post)
         .then((res) => {
@@ -114,6 +151,7 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
         })
         .catch((err) => {
           setResText("Попробуйте заново");
+          setIsSkip(true);
           setSuccess(true);
           setIsLoading(false);
           console.log(err);
@@ -164,7 +202,11 @@ function FormInputs({ text, action, score, subject, allQuestions }) {
         isError={errorSelect}
         setIsOpen={setIsOpen}
       />
-
+      {action && (
+        <Skip onClick={action} isSkip={isSkip}>
+          Пропустить
+        </Skip>
+      )}
       <SendButton
         text={success ? resText : text}
         action={addCallback}
@@ -261,4 +303,13 @@ const Img = styled.img`
   @media screen and (max-width: 320px) {
     right: 18%;
   }
+`;
+
+const Skip = styled.div`
+  color: grey;
+
+  /* margin: 20px; */
+  display: grid;
+  visibility: ${(props) => (props.isSkip ? "visible" : "hidden")};
+  text-align: center;
 `;

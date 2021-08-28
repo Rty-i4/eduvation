@@ -3,10 +3,8 @@ import styled from "styled-components";
 import { H1, H3 } from "../../layout/TextStyles";
 
 // Images
-import Cambridge from "../../images/cambridge.jpg";
 import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
-import { ButtonsWrapper } from "../../layout/ButtonsWrapper";
 
 function PageHero({ title, description, image, text, action, secondAction }) {
   return (
@@ -71,6 +69,7 @@ const HeroImage = styled.div`
   background-repeat: no-repeat;
   /* background-attachment: fixed; */
   background-position: center center;
+
   background-size: cover;
   box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
 

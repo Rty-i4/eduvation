@@ -13,26 +13,30 @@ function Addresses() {
     {
       name: "NUR-SULTAN",
       address: "Кошкарбаева 10/1, этаж D6",
-      mobile: "+7 (707) 900 19 23",
+      mobile: "+7 (707) 900 14 14",
       instagram: "eduvation.kz",
+      link: "https://www.instagram.com/eduvation.kz/",
     },
     {
       name: "ALMATY",
       address: "4 Микро-район, 74 А, 1 этаж",
       mobile: "+7 (777) 831 74 48",
       instagram: "oxford_vision",
+      link: "https://www.instagram.com/eduvation_almaty/",
     },
     {
       name: "ATYRAU",
       address: "Азаттык 26 Б",
       mobile: "+7 (775) 688 01 30",
       instagram: "amityacademy",
+      link: "https://www.instagram.com/amityacademy/",
     },
     {
       name: "AKTOBE",
       address: "Жубанова 298 Б, 1 этаж",
       mobile: "+7 (707) 770 25 77",
       instagram: "oxfordvision_aktobe",
+      link: "https://www.instagram.com/oxfordvision_aktobe/",
     },
   ];
   return (
@@ -52,6 +56,7 @@ function Addresses() {
               instagram={city.instagram}
               mobile={city.mobile}
               key={index}
+              link={city.link}
             />
           ))}
         </EndWrapper>

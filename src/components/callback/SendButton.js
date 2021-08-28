@@ -16,6 +16,7 @@ const Button = styled.button`
   margin-left: auto;
   margin-right: auto;
   margin-top: 40px;
+  margin-top: 30px;
   /* margin-bottom: 20px; */
 
   width: 290px;

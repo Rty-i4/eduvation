@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-
+// placement test
 // import { questions } from "../../Data/Questions";
 import { questions } from "../../Data/PlacementQuestions";
 
@@ -108,7 +108,6 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   //       setEnglishLevel("IELTS");
   //   }
   // };
-
   const calculateScore = () => {
     var s = 0;
     var i;
@@ -121,32 +120,6 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
       });
     }
     setScore(s);
-
-    switch (true) {
-      case s < 16:
-        setEnglishLevel("Beginner");
-        console.log(englishLevel);
-        break;
-      case s < 25:
-        setEnglishLevel("Elementary");
-        console.log(englishLevel);
-        break;
-      case s < 33:
-        setEnglishLevel("Pre-intermediate");
-        console.log(englishLevel);
-        break;
-      case s < 40:
-        setEnglishLevel("Intermediate");
-        console.log(englishLevel);
-        break;
-      case s < 46:
-        setEnglishLevel("Upper-intermediate / IELTS");
-        console.log(englishLevel);
-        break;
-      default:
-        console.log(englishLevel, s);
-        setEnglishLevel("IELTS");
-    }
   };
 
   const handleNext = () => {
@@ -203,6 +176,41 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
   //     setShowingScore(!showingScore);
   //   }, 800);
   // }, [showScore]);
+  useEffect(() => {
+    // const timer = setTimeout(() => {
+    //   console.log("This will run after 1 second!");
+    switch (true) {
+      case score < 16:
+        setEnglishLevel("Beginner");
+
+        // console.log(englishLevel);
+        break;
+      case score < 25:
+        setEnglishLevel("Elementary");
+        // console.log(englishLevel);
+        break;
+      case score < 33:
+        setEnglishLevel("Pre-intermediate");
+        // console.log(englishLevel);
+        break;
+      case score < 40:
+        setEnglishLevel("Intermediate");
+        // console.log(englishLevel);
+        break;
+      case score < 46:
+        setEnglishLevel("Upper-intermediate / IELTS");
+        break;
+      case score < 51:
+        setEnglishLevel("IELTS");
+
+        break;
+      default:
+        // console.log(englishLevel);
+        setEnglishLevel("Beginner");
+    }
+    // }, 10);
+    // return () => clearTimeout(timer);
+  }, [score]);
 
   // Click outside refs
 
@@ -242,6 +250,7 @@ export default function Quiz({ isTest, handleQuiz, setIsTest }) {
                 backToQuiz={backToQuiz}
                 score={score}
                 allQuestions={questions}
+                levelOfEnglish={englishLevel}
               />
             ) : (
               <Section welcome={welcome}>

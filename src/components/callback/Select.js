@@ -97,7 +97,7 @@ const Img = styled.img`
   z-index: 1;
 `;
 
-const options = ["Nur-Sultan", "Almaty", "Atyrau", "Aktobe"];
+const options = ["Нур-Султан", "Алматы", "Атырау", "Актобе"];
 
 export default function App({
   selectedOption,

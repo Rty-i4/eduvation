@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PageHero from "../components/PageHero/PageHero";
-import library from "../images/library.jpg";
+import library from "../images/library2.jpg";
 
 import ielts7 from "../images/ielts7.svg";
 import learning from "../images/Iconly/Bulk/learning.svg";

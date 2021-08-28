@@ -11,6 +11,8 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import firebase from "./utils/firebaseConfig";
+
 import Header from "./components/header/header";
 import Home from "./pages/home";
 import Callback from "./components/callback/Callback";
@@ -21,6 +23,7 @@ import SatPage from "./pages/SatPage";
 import NufypetPage from "./pages/NufypetPage";
 import ScrollToTop from "./layout/ScrollToTop";
 import EnglishPage from "./pages/EnglishPage";
+import { SignupForm } from "./components/signupForm/SignupForm";
 import axios from "axios";
 
 axios.defaults.baseURL =
@@ -34,6 +37,7 @@ function App() {
         <Router>
           <ScrollToTop />
           <Header />
+          <SignupForm />
           <Switch>
             {/* <Route exact path="/">
               <Home />

@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import goknam from "../../images/goknam.png";
-import vlad from "../../images/vladislav.png";
+import vlad from "../../images/vladNew.png";
+import Camb from "../../images/IeltsBack1.png";
 import { HeroTitle } from "../../layout/TextStyles";
 import MainButton from "../buttons/MainButton";
 import SecondaryButton from "../buttons/SecondaryButton";
@@ -16,7 +16,7 @@ function Hero({ action, mainAction }) {
         <Section>
           <HeroTitle>
             Курсы по подготовке к <br />
-            IELTS, SAT, NUFYPET, <br />
+            IELTS, SAT, NUFYPET, <BR />
             English
           </HeroTitle>
           <HeroP>
@@ -48,16 +48,29 @@ function Hero({ action, mainAction }) {
 export default Hero;
 
 const BG = styled.div`
-  background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
-  border-radius: 16px;
-  margin: 0 20px;
-  @media screen and (max-width: 768px) {
-    border-radius: 0px;
+  background: 
+  /* url(${Camb}), */ linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
+  /* border-radius: 16px; */
+  /* margin: 0 20px; */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media screen and (max-width: 450px) {
+    background: linear-gradient(91.26deg, #82c132 1.96%, #42a132 100%);
   }
   @media screen and (max-width: 768px) {
     margin: 0;
   }
   overflow: hidden;
+
+  @media screen and (min-width: 1300px) {
+    border-radius: 0px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    display: grid;
+    justify-content: center;
+  }
+
   /* overlay: none; */
   /* height: 300px; */
 `;
@@ -68,6 +81,18 @@ const Wrapper = styled.div`
   grid-template-areas: "text image";
   align-items: center;
   margin: 30px 20px;
+  @media screen and (min-width: 1300px) {
+    grid-template-columns: 700px auto;
+    h1 {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 24px;
+      width: 500px;
+      font-weight: 500;
+    }
+  }
   /* border-radius: 16px;
   @media screen and (max-width: 768px) {
     border-radius: 0px;
@@ -92,6 +117,7 @@ const Img = styled.img`
   margin-left: auto;
   margin-right: auto;
   grid-area: image;
+  /* margin-left: 20px; */
 
   @media screen and (max-width: 768px) {
     width: 350px;
@@ -116,6 +142,10 @@ const Section = styled.div`
     grid-gap: 0;
     margin-left: 20px;
   }
+
+  @media screen and (min-width: 1300px) {
+    grid-gap: 20px;
+  }
 `;
 // div for loading fast
 const ImgContainer = styled.div`
@@ -138,4 +168,10 @@ const HeroP = styled.p`
   font-size: 16px;
   width: 286px;
   line-height: 130%;
+`;
+
+const BR = styled.br`
+  @media screen and (min-width: 1300px) {
+    display: none;
+  }
 `;

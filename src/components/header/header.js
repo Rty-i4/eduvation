@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../images/Iconly/Bulk/logo.svg";
-import { Img } from "./headerStyles";
+import logo from "../../images/logo.svg";
+// import { Img } from "./headerStyles";
 
 import { Link as LinkScroll } from "react-scroll";
 
@@ -101,7 +101,7 @@ function Header() {
           <MenuItem title="hello">Контакты</MenuItem>
           <Hr />
         </LinkScroll>
-        <a href="https://eduvation.kz">
+        <a href="https://eduvation.online">
           <MenuItem title="hello">Онлайн-платформа</MenuItem>
         </a>
       </Tooltip>
@@ -246,5 +246,16 @@ const MenuDesktop = styled.div`
 
   @media screen and (max-width: 768px) {
     display: none;
+  }
+`;
+
+export const Img = styled.img`
+  display: block;
+  margin: 40px auto 30px 40px;
+  /* justify-content: center; */
+  height: 20px;
+
+  @media screen and (max-width: 450px) {
+    margin: 30px auto;
   }
 `;

@@ -7,7 +7,7 @@ import arrowLeft from "../../images/arrow-left.svg";
 
 import styled from "styled-components";
 
-function QuizForm({ action, backToQuiz, score, allQuestions }) {
+function QuizForm({ action, backToQuiz, score, allQuestions, levelOfEnglish }) {
   return (
     <Wrapper>
       <ButtonBack onClick={backToQuiz}>
@@ -21,6 +21,7 @@ function QuizForm({ action, backToQuiz, score, allQuestions }) {
         text="Узнать результат"
         score={score}
         allQuestions={allQuestions}
+        levelOfEnglish={levelOfEnglish}
       />
     </Wrapper>
   );

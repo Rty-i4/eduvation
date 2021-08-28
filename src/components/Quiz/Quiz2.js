@@ -186,17 +186,17 @@ export default function Quiz2({
 
   const addCallback = (e) => {
     // e.preventDefault();
-    switch (selectedOption) {
-      case "Aktobe":
+    switch (post.city) {
+      case "Актобе":
         setPost({ ...newCallback, mailTo: "oxfordvision16@gmail.com" });
         break;
-      case "Atyrau":
+      case "Атырау":
         setPost({ ...newCallback, mailTo: "amityacademy2016@gmail.com" });
         break;
-      case "Nur-Sultan":
+      case "Нур-Султан":
         setPost({ ...newCallback, mailTo: "astanamerit@gmail.com" });
         break;
-      case "Almaty":
+      case "Алматы":
         setPost({ ...newCallback, mailTo: "rturniyazov@mail.ru" });
         break;
       default: {
@@ -253,6 +253,7 @@ export default function Quiz2({
         // console.log(res.data.message);
         // console.log(post);
         console.log("success");
+        console.log(post);
         setSuccess(true);
         setShowScore(true);
         setIsLoading(false);
@@ -304,8 +305,8 @@ export default function Quiz2({
             })
           : setPost({
               ...post,
-              name:
-                allQuestions[currentQuestion].answerOptions[index].answerText,
+              name: allQuestions[currentQuestion].answerOptions[index]
+                .answerText,
             });
         break;
       case 2:
@@ -327,8 +328,8 @@ export default function Quiz2({
             })
           : setPost({
               ...post,
-              year:
-                allQuestions[currentQuestion].answerOptions[index].answerText,
+              year: allQuestions[currentQuestion].answerOptions[index]
+                .answerText,
             });
         break;
       case 4:
@@ -361,8 +362,8 @@ export default function Quiz2({
             })
           : setPost({
               ...post,
-              time:
-                allQuestions[currentQuestion].answerOptions[index].answerText,
+              time: allQuestions[currentQuestion].answerOptions[index]
+                .answerText,
             });
         console.log(post);
         break;

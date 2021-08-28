@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { BodyMain, MediumTextDiv } from "../../layout/TextStyles";
 
 // Icons
-import Cat from "../../images/Cat.png";
 
 function Teachers({ name, description, image }) {
   return (
