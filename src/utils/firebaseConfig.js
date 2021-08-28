@@ -2,15 +2,13 @@ import firebase from "firebase/app";
 import "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDc1QeYkPB-S1lJvc6Ym4mCXJgw56d93LM",
-  authDomain: "eduvation-b02a9.firebaseapp.com",
-  projectId: "eduvation-b02a9",
-  storageBucket: "eduvation-b02a9.appspot.com",
-  messagingSenderId: "310164038714",
-  appId: "1:310164038714:web:67095ed782b0f8907b8103",
-  measurementId: "G-6XDYQGBR58",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
-
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
